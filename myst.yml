@@ -1,0 +1,35 @@
+version: 1
+project:
+  title: CHTuser
+  authors:
+    - name: R.J. LeVeque
+  copyright: '2025'
+  bibliography:
+    - docs/references.bib
+  exports:
+    - format: pdf
+      template: plain_latex_book
+      output: exports/CHTuser.pdf
+  toc:
+    - title: Overview and introduction
+    - file: intro.md
+    - file: docs/Test.ipynb
+      children:
+        - file: docs/prerequisites.md
+          children:
+            - file: /docs/python_environment.md
+        - file: docs/workflow.md
+    - title: GaugeOutput
+      children:
+        - file: docs/intro_examples.md
+        - file: sites/Newport/LoadGaugesNewport.ipynb
+    - title: Resources
+      children:
+        - file: docs/intro_resources.md
+        - file: docs/biblio.md
+site:
+  options:
+    logo: images/cropped-Transparent-Hub-Logo.png
+    favicon: images/geoclaw-favicon-32x32.png
+    folders: true
+  template: book-theme
