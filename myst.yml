@@ -12,18 +12,19 @@ project:
       template: plain_latex_book
       output: exports/CHTuser.pdf
   toc:
-    - title: Overview and introduction
     - file: intro.md
-    - file: docs/Test.ipynb
+    - title: Overview and introduction
       children:
+        - file: docs/Test.ipynb
         - file: docs/prerequisites.md
           children:
             - file: /docs/python_environment.md
         - file: docs/workflow.md
     - title: GaugeOutput
       children:
-        - file: docs/intro_examples.md
+        - file: docs/intro_gauges.md
         - file: sites/Newport/LoadGaugesNewport.ipynb
+        - file: sites/WestportBridges/LoadGaugesWestportBridges.ipynb
     - title: Resources
       children:
         - file: docs/intro_resources.md
