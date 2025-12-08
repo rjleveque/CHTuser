@@ -4,6 +4,7 @@ project:
   authors:
     - name: R.J. LeVeque
   copyright: '2025'
+  github: rjleveque/CHTuser
   bibliography:
     - docs/references.bib
   exports:
@@ -30,6 +31,6 @@ project:
 site:
   options:
     logo: images/cropped-Transparent-Hub-Logo.png
-    favicon: images/geoclaw-favicon-32x32.png
+    favicon: images/cropped-Hub-Logo-no-words-1-32x32.png
     folders: true
   template: book-theme
