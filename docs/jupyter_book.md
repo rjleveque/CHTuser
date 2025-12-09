@@ -50,7 +50,7 @@ this also works:
     export BASE_URL=/ptha/CHTuser
     jupyter book build --html --execute
 
-    rsync -avz _build/html/ $PTHAWEB/CHTuser/
+    rsync -avz _build/html/ ptha@homer.u.washington.edu:public_html/CHTuser/
 
 ## Build on laptop for testing:
 

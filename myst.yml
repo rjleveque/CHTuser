@@ -16,6 +16,7 @@ project:
     - title: Overview and introduction
       children:
         - file: docs/python_env.md
+        - file: docs/ground_motions.md
         - file: docs/Test.ipynb
         - file: docs/prerequisites.md
           children:
