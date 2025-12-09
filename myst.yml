@@ -15,6 +15,7 @@ project:
     - file: intro.md
     - title: Overview and introduction
       children:
+        - file: docs/python_env.md
         - file: docs/Test.ipynb
         - file: docs/prerequisites.md
           children:
@@ -28,6 +29,7 @@ project:
     - title: Resources
       children:
         - file: docs/intro_resources.md
+        - file: docs/jupyter_book.md
         - file: docs/biblio.md
 site:
   options:
