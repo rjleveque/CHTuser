@@ -16,12 +16,15 @@ project:
     - title: Overview and introduction
       children:
         - file: docs/python_env.md
-        - file: docs/ground_motions.md
         - file: docs/Test.ipynb
         - file: docs/prerequisites.md
           children:
             - file: /docs/python_environment.md
         - file: docs/workflow.md
+    - title: Ground motions / dtopo
+      children:
+        - file: docs/ground_motions.md
+        - file: dtopo/GroundMotions.ipynb
     - title: GaugeOutput
       children:
         - file: docs/intro_gauges.md

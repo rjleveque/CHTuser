@@ -31,11 +31,12 @@ In your top level directory you should see
 
 and possibly other subdirectories.
 
-Of particular interest for the CoPes Hub:
+### Of particular interest for the CoPes Hub:
 
-- `CommunityData/geoclaw` has data posted by `rjl` for general access, including
-  some tsunami simulation results (with more to come).  Notebooks in this
-  repository may read data from this directory.
+- `CommunityData/geoclaw` has data posted by `rjl` for general access,
+  including some tsunami simulation results (with more to come).
+  Notebooks in this repository may read data from
+  `CommunityData/geoclaw/CHTdata`.
 
 - `MyProjects/PRJ-6005` is a DesignSafe project that is not published publicly
   but is intended for our collaboration, as a place to put data that you want
@@ -64,6 +65,15 @@ files.
 
 Running these notebooks generally requires a number of Python packages that
 are not installed in the default Python kernel.  See [](python_env).
+
+## Downloading data
+
+The data found in `CommunityData/geoclaw` can be downloaded to your own
+computer if you want to run the notebooks locally, or do your own
+analysis/plotting with different tools.  This requires an account on TACC,
+and then you can do, e.g.
+
+    scp username@stampede3.tacc.utexas.edu:/corral/projects/NHERI/community/geoclaw/filename ./
 
 ## Accessing files from TACC
 

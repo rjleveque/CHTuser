@@ -3,6 +3,8 @@
 
 These webpages are build using
 [Jupyter Book 2](https://jupyterbook.org/stable/).
+These notes are not needed by users of these notes or the notebooks in this
+repository, but may be useful to others with similar needs for other projects.
 
 Building the book requires running any Jupyter notebooks, which in turn
 requires data from a directory `CHTdata` that is assumed to exist.

@@ -7,3 +7,6 @@ The surface deformation from these ground motions have been used as sources
 for tsunami simulations.
 
 ## Summary of sources
+
+See the [dtopo/GroundMotions.ipynb notebook](GroundMotions) for a list of
+the sources and some additional information.
