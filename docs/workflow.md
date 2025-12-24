@@ -107,3 +107,7 @@ using the Python tools in GeoClaw, you can use the common version posted
 *where*?
 
 *More to come on using slurm scripts, etc.*
+
+:::{seealso}
+[](jupyter_book) for an explanation of how this book is modified and built.
+:::
