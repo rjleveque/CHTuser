@@ -22,8 +22,8 @@ project:
           children:
             - file: /docs/python_environment.md
         - file: docs/workflow.md
+        - file: docs/geoclaw_on_tacc.md
         - file: docs/run-many-dtopos.md
-        - file: docs/junk.md
     - title: Ground motions / dtopo
       children:
         - file: docs/ground_motions.md
