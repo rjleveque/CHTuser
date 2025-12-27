@@ -15,12 +15,15 @@ project:
     - file: intro.md
     - title: Overview and introduction
       children:
+        - file: intro.md
         - file: docs/python_env.md
         - file: docs/Test.ipynb
         - file: docs/prerequisites.md
           children:
             - file: /docs/python_environment.md
         - file: docs/workflow.md
+        - file: docs/run-many-dtopos.md
+        - file: docs/junk.md
     - title: Ground motions / dtopo
       children:
         - file: docs/ground_motions.md
