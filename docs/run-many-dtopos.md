@@ -220,11 +220,20 @@ and so this could be accomplished with the following workflow:
     # edit runclaw_makeplots_dtopos.py to set events = all_events[:12]
     sbatch runm_geoclaw-test.slurm 12
 
-    # edit runclaw_makeplots_dtopos.py to set events = all_events[12:24]
+    # wait until that job starts running before modifying runclaw_makeplots_dtopos.py!
+    # then edit runclaw_makeplots_dtopos.py to set events = all_events[12:24]
     sbatch runm_geoclaw-test.slurm 12
 
-    # edit runclaw_makeplots_dtopos.py to set events = all_events[24:]
+    # wait until that job starts running before modifying runclaw_makeplots_dtopos.py!
+    # then edit runclaw_makeplots_dtopos.py to set events = all_events[24:]
     sbatch runm_geoclaw-test.slurm 12
+
+Or you could make different versions of `runclaw_makeplots_dtopos.py` for
+each set of runs, and different slurm scripts to submit each.
+
+This can probably be streamlined using
+[PyLauncher](https://docs.tacc.utexas.edu/software/pylauncher/) on
+`stampede3`, but this has not yet been investigated.
 
 :::{seealso}
 - [Running Jobs on
