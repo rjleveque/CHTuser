@@ -83,20 +83,33 @@ and then you can do, e.g.
 If you have an account/allocation on [TACC](https://tacc.utexas.edu/), e.g.
 on `stampede3`, then you can access the `CommunityData/geoclaw` folder
 mentioned above as `/corral/projects/NHERI/community/geoclaw`.
-This works from a login node or from a job being run via a slurm script
-(**True?**).
-Note that it does not work from an interactive shell created with the `idev`
-command, since that shell does not have access to `/corral`.
-
 Files in the directory `MyProjects/PRJ-6005` on DesignSafe can be accessed
 from TACC as
 `/corral/projects/NHERI/projects/7f2e74be-d7ca-4e0e-b69a-22c24840b078`
+
+You can access `corral` from a login node, but not from a computational 
+job run on an interactive shell created with the `idev`
+command, or submitted via Slurm, since compute nodes do
+not have access to `/corral`.
+So you will first have to copy files to your `$SCRATCH` or `$WORK`
+directory to use them.
+See the [TACC corral documentation](https://docs.tacc.utexas.edu/hpc/corral/)
+for more information.
+
 
 Files in your `Work` directory on DesignSafe are in your
 `$WORK` directory on TACC.  When running large jobs on TACC you probably want
 to direct the output to your `$SCRATCH` directory, but then you might want to
 copy some output to `$WORK` to make it available for analysis in a Jupyter
 notebook running on DesignSafe.
+
+Some files to be shared among collaborators can be found on TACC in
+
+    /work2/04137/rjl/CHTshare
+
+If you plan to run GeoClaw yourself, see [](geoclaw_on_tacc) for more about
+these shared files.
+
 
 :::{seealso}
 - [Managing I/O on TACC resources](https://docs.tacc.utexas.edu/tutorials/managingio/)
