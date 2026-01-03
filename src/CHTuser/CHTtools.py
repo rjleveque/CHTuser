@@ -25,7 +25,7 @@ def all_events():
     all_events.sort()
 
     return all_events
-
+    
 
 def shortname(event):
     """
@@ -60,7 +60,56 @@ def shortname(event):
 
     return newname
 
+def longname(event, delimiter='-'):
+    if (event[0] not in 'BF') or (event[1] not in 'LR') \
+        or (event[4] not in 'DMS'):
+        print(f'*** problem converting {event}, expecting e.g. "BL10D"')
+        return ''
+
+    if event[0] == 'B':
+        lname = f'buried{delimiter}'
+    else:
+        lname = f'ft{delimiter}'
+
+    if event[1] == 'L':
+        lname += f'locking{delimiter}'
+    else:
+        lname += f'random{delimiter}'
+
+    if event[2:4] == '10':
+        lname += f'str10{delimiter}'
+    elif event[2:4] == '13':
+        lname += f'mur13{delimiter}'
+    elif event[2:4] == '16':
+        lname += f'skl16{delimiter}'
+    else:
+        print(f'*** problem converting {event}, expecting e.g. "BL10D"')
+        return ''
+
+    if event[4] == 'D':
+        lname += f'deep'
+    elif event[4] == 'M':
+        lname += f'middle'
+    else:
+        lname += f'shallow'
+
+    if event[-8:] == '_instant':
+        lname += '_instant'
+
+    return lname
+
 def name_conversions():
+
+    events = all_events()  # all 36 short names
+    print('List of events by event number, alphabetized by short name')
+
+    for k,event in enumerate(events):
+        lname = longname(event)
+        event_num = k+1
+        print(f'{event_num:4d}    {event}    {lname}')
+
+
+def name_conversions_long_to_short():
     models = \
        ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
         'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
@@ -72,6 +121,9 @@ def name_conversions():
 
     events = events + [e.replace('buried','ft') for e in events]
     events.sort()
+
+    print('List of events, alphabetized by long name')
+
     for event in events:
         #print(f'  {event.ljust(30)} --> {shortname(event)}')
         print(f'  {shortname(event)} = {event}')
