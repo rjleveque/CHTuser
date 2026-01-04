@@ -45,8 +45,8 @@ The main difference is that this setrun function has an additional argument
 `case` that is not usually in setrun.  This is a dictionary that will be passed
 in when creating the `*.data` files for a particular case.
 For our situation, the only important entry in the dictionary is
-`dtopofiles` since the value `case['dtopofiles']` will be used in setting
-`dtopo_data.dtopofiles`.  (Also `case['outdir']` is used if doing a
+`dtopofile` since the value `case['dtopofile']` will be used in setting
+`runclaw.dtopo_data.dtopofiles`.  (Also `case['outdir']` is used if doing a
 restart.)
 
 Everything else in `setrun` will be exactly the same for all events being run.
@@ -67,8 +67,8 @@ record time series at a single gauge (over a very short run for illustration).
 
 ### Testing setrun with no dtopo
 
-The `setrun_case.py` file contains a main program that `setrun` with 
-`case={'dtopofiles':[]}` and creates the `*.data` files needed for GeoClaw
+The `setrun_case.py` file contains a main program that calls `setrun` with 
+`case={}` and creates the `*.data` files needed for GeoClaw
 so that these can be checked, if desired, before running multiple jobs with
 different dtopo files.  
 
@@ -106,8 +106,7 @@ results, or to make animations from fgout grid data.
 Similar to `setrun_case`, the setplot function in this file has an
 additional argument `case` that is used in the post-processing.
 
-The example included in the simple example in `tacc-test`
-creates one gauge plot and a text file in the
+The simple example in `tacc-test` creates one gauge plot and a text file in the
 `_plots` directory for each event.
 
 ## The script to run multiple cases
@@ -125,8 +124,18 @@ A simple example with some documentation can be found in
 [`$CLAW/clawutil/examples/clawmultip_advection_1d_example1`](https://github.com/clawpack/clawutil/tree/master/examples/clawmultip_advection_1d_example1).
 :::
 
+This script can be run from the command line with a the syntax:
+
+    python runclaw_makeplots_dtopos.py <nprocs> <first_event> <last_event>
+
+where `<procs>` indicates how many geoclaw runs should be done in parallel,
+and `<first_event> <last_event>` indicates the range of events that should
+be used for the dtopo files, as explained further below.  On TACC,
+a Slurm script can be used that takes the same arguments to submit a job,
+see [](run-many-dtopos:slurm).
+
 In the script `runclaw_makeplots_dtopos.py`, you can
-set `dry_run = True` to just print out info about what will be done   
+set `dry_run = True` to just print out info about what will be done,
 or to `False` to actually run the code and/or make plots.
 
 Before running the code you should
@@ -160,23 +169,29 @@ If `run_code` is True, make sure `xgeoclaw_path` is properly set to the
 executable (which must have been previously compiled using an appropriate
 Makefile and version of GeoClaw).
 
-Set events to the list of event names to be run.
-Event names like 'BL10D' are now typically expected, and the dtopofile should be
+This script sets `all_events` to the list of 36 CoPes Hub
+groundmotions (see [](groundmotions)),
+and this is assumed for the command line arguments
+`<first_event>` and `<last_event>` to work properly.
+Event names like 'BL10D' are generated, and the dtopofile should be
 in `f'{dtopo_dir}/{event}.dtt3'`.
+If you want to use static displacement "instant" events, the file names
+should be like `BL10D_instant.dtt3` and you should set `instant = True`
+in this script to properly generate these file names.
 
-The sample code sets `all_events` to a list of 36 events, and then selects only
-the first 2 for this test case.
 
 After modifying this file, test it by setting `dry_run = True` and then:
 
-    python runclaw_makeplots_dtopos.py 2
+    python runclaw_makeplots_dtopos.py 2 1 4
 
 The number 2 indicates that it should do 2 runs at a time using Python
-multiprocessing tools.
+multiprocessing tools, on events numbered 1 to 4 in the list of 36 events at
+[](GroundMotions).
 
 If the screen output from this looks ok, change to `dry_run = False`
 and submit a batch run using Slurm.
 
+(run-many-dtopos:slurm)=
 ## The Slurm script for job submission
 
 The script
@@ -197,46 +212,110 @@ Before running the script, note that:
   the runs can be restarted if the job runs out of time. See ??.
 :::
 
-Once you modified the script appropriately (along with `setrun_case.py`,
+Once you have modified the script appropriately (along with `setrun_case.py`,
 `setplot_case.py`, and `runclaw_makeplots_dtopos.py`), you can submit a
 batch job that runs `<nprocs>` jobs in parallel via:
 
-    sbatch runm_geoclaw-test.slurm <nprocs>
+    sbatch runm_geoclaw-test.slurm <nprocs> <first_event> <last_event>
 
+where `<nprocs>` is some positive integer no greater than 48 (on TACC),
+and `<first_event> <last_event>` again specify the range of events from the
+36 CHT ground motions.
 In this case the Slurm script sets `OMP_NUM_THREADS` so that the product of
 `<nprocs>` and `OMP_NUM_THREADS` is no larger than 48,
 which is the number of threads available on a single node of `stampede3`.
 
-If you want to run 36 events,
-for example, you could use `<nprocs> = 1` so
-they all run in parallel with 1 OpenMP thread each.  But
-it might be more efficient to run them in 3 batches of 12 events by setting
-`<nprocs> = 12`, so that 4 OpenMP threads are used for each.
+If you want to run the first 18 CHT events,
+for example (the buried rupture events), you could use `<nprocs> = 18` so
+they all run in parallel with 2 OpenMP threads for each, or with `<nprocs> = 1`
+so that they run sequentially with 48 threads for each run.  But
+it might be most efficient to run them in 3 batches of 6 events by setting
+`<nprocs> = 6`, so that 8 OpenMP threads are used for each.
 
-Note that the script `runclaw_makeplots_dtopos.py` creates a list
-`all_events` of the 36 events corresponding to the CoPes Hub [](groundmotions),
-and so this could be accomplished with the following workflow:
 
-    # edit runclaw_makeplots_dtopos.py to set events = all_events[:12]
-    sbatch runm_geoclaw-test.slurm 12
+Running in 3 batches of 6 could be accomplished one of two ways:
 
-    # wait until that job starts running before modifying runclaw_makeplots_dtopos.py!
-    # then edit runclaw_makeplots_dtopos.py to set events = all_events[12:24]
-    sbatch runm_geoclaw-test.slurm 12
+With a single slurm job:
 
-    # wait until that job starts running before modifying runclaw_makeplots_dtopos.py!
-    # then edit runclaw_makeplots_dtopos.py to set events = all_events[24:]
-    sbatch runm_geoclaw-test.slurm 12
+    sbatch runm_geoclaw-test.slurm 6 1 18
 
-Or you could make different versions of `runclaw_makeplots_dtopos.py` for
-each set of runs, and different slurm scripts to submit each.
+which will run 6 at a time until all 18 have been run (automatically
+starting a new run whenever a previous run finishes).
 
-This can probably be streamlined using
+or by starting 3 jobs, each one running 6 dtopos in parallel:
+
+    sbatch runm_geoclaw-test.slurm 6 1 6
+    sbatch runm_geoclaw-test.slurm 6 7 12
+    sbatch runm_geoclaw-test.slurm 6 8 18
+
+This will submit 3 jobs to the queue, each one using one node with 48 cores
+(with 8 OpenMP threads for each geoclaw run).
+
+
+Note that there are limits to how many jobs one user can submit at a time,
+and also time limits on individual jobs. The time limit you need to set will
+depend on the time for a single geoclaw run and will
+also depend on how many jobs are run sequentially, e.g. the first approach
+above wil require roughly 3 times as much wall time as the second approach.
+The latter approach would also get the work done sooner: provided all three jobs
+submitted start running quickly, all 18 of the geoclaw simulations will be
+running in parallel. 
+
+Job management could possibly be streamlined using
 [PyLauncher](https://docs.tacc.utexas.edu/software/pylauncher/) on
 `stampede3`, but this has not yet been investigated.
 
 :::{seealso}
 - [Running Jobs on
   stampede3](https://docs.tacc.utexas.edu/hpc/stampede3/#running)
-  in the TACC documentation.
+  in the TACC documentation, for more information on the queues and limits.
 :::
+
+(run-many-dtopos:share)=
+## Shared data files on TACC
+
+The directory `/work2/04137/rjl/CHTshare/CopesHubTsunamis` is accessible on
+TACC and contains the dtopofiles needed for these simulations, along with
+some topofiles that have been used in the past and may be useful for new
+simulations.  (You may also need additional high-resolution coastal
+topography if you are setting up runs for a new location.)
+
+In addition to being useful when running jobs on TACC, this can also be used
+as a source of data files for setting up or running jobs on your laptop.
+If you have an account on TACC, you can download any of the files (or
+directories) listed below using `rsync`, for example.
+
+### dtopofiles
+
+The directory
+`/work2/04137/rjl/CHTshare/CopesHubTsunamis/dtopo/CSZ_groundmotions`
+contains some sets of dtopofiles:
+
+- Subdirectory `dtopo30sec/dtopofiles` contains the original kinematic
+  (time-dependent) ground motions as computed by SPECFEM3D, after
+  interpolation to a grid with 30 arcsecond resolution in space and 10 second
+  resolution in time. The file names are simply `BL13D.dtt3` etc. and each
+  one is roughly 180M in size.
+
+  This subdirectory also contains 36 versions with names like
+  `BL13D_instant.dtt3`, which contain the final static displacement at the
+  end of the earthquake, with the full displacement specified at time 0.
+  **(Currently at t=1 second, but we should change this.)**
+
+- Subdirectory `nosubevents_251229/dtopofiles` contains 18 static
+  displacements with names like `BL13D_instant.dtt3` that were computed
+  using the Okada model from modified slips that do not contain the
+  subevents. *(Describe in more detail.)*
+
+### topofiles
+
+The directory `/work2/04137/rjl/CHTshare/CopesHubTsunamis/topo/topofiles`
+contains some topfiles. *(Add more details.)*
+
+### GeoClaw executables
+
+The directory `/work2/04137/rjl/CHTshare/clawpack-share/tacc` contains some
+geoclaw executables that can be used to run GeoClaw (provided you do not
+need to modify any of the Fortran code). See [](geoclaw_on_tacc:share) and
+the file `/work2/04137/rjl/CHTshare/clawpack-share/tacc/README.txt`
+for more details.

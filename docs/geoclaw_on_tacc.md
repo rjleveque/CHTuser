@@ -40,6 +40,7 @@ in a bash shell (consider putting this in `~/.bashrc`):
     source ~/venv/geoclaw2/bin/activate
 
 
+(geoclaw_on_tacc:share)=
 ## Using shared Clawpack Python modules and GeoClaw executable:
 
 If you don't need to change any of the Fortran code and/or are only
@@ -120,32 +121,35 @@ creates an executable `$CHT/geoclaw_runs/xgeoclaw-v5.13.1`.
 To run the script `runclaw_makeplots_dtopos.py` on a laptop or
 desktop, this can be done from the command line via e.g.:
 
-    python runclaw_makeplots_dtopos.py 2
+    python runclaw_makeplots_dtopos.py 2 1 4
 
-which would run two geoclaw jobs at a time to process all of the `events`
-(and in this simple example only 2 events are listed). Each job would be run
+which would run two geoclaw jobs at a time to process event numbers 1 to 4
+from the list of 36 CoPes Hub events listed [](GroundMotions).
+Each job would be run
 using the environment variable `$OMP_NUM_THREADS` to determine how many
 OpenMP threads to use, and will send the output and plots made to distinct
 directories for each run, perhaps on a scratch disk.  If `dry_run = True` in
 this script, then it prints information about what will be done without
-actually running the code or producing plots, e.g.
+actually running the code or producing plots, e.g. on a laptop:
 
     --------------------------
     DRY RUN - settings in runclaw_makeplots_dtopos.py
-    Will run GeoClaw for 2 dtopo files
+    Will run GeoClaw for 4 dtopo files
     dtopo files should be in dtopo_dir:
-         /work2/04137/rjl/CHTshare//CopesHubTsunamis/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles
+         /Users/rjl/git/CopesHubTsunamis/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles
     list of dtopo_files to process:
       BL10D.dtt3
       BL10M.dtt3
+      BL10S.dtt3
+      BL13D.dtt3
     output will go in 
-        /scratch/04137/rjl/CopesHubTsunamis/geoclaw_runs/tacc-test/geoclaw_outputs/
+        /Users/rjl/scratch/CopesHubTsunamis/geoclaw_runs/tacc-test/geoclaw_outputs/
     plots will go in 
-        /scratch/04137/rjl/CopesHubTsunamis/geoclaw_runs/tacc-test/geoclaw_plots/
+        /Users/rjl/scratch/CopesHubTsunamis/geoclaw_runs/tacc-test/geoclaw_plots/
     nprocs = 2 jobs will run simultaneously
-    OMP_NUM_THREADS =  24
+    OMP_NUM_THREADS =  6
     GeoClaw executable:
-         /work2/04137/rjl/CHTshare/clawpack-share/tacc/xgeoclaw_251229
+         /Users/rjl/git/CopesHubTsunamis/geoclaw_runs/xgeoclaw-v5.13.1
     Set dry_run=False and re-execute to run GeoClaw
     --------------------------
 
@@ -162,10 +166,12 @@ On TACC, this job can be submitted for batch processing on one node of
 
 To run this quick test on TACC, the command to use at the command line is:
 
-    sbatch runm_geoclaw-test.slurm 2
+    sbatch runm_geoclaw-test.slurm 2 1 4
 
-where again the integer 2 implies that the 2 events specified in
-`runclaw_makeplots_dtopos.py` should be run in parallel.
+where again the integer `NPROCS=2` implies that two events at a time
+should be run, looping over events numbered 1 to 4.
+These numbers are passed to `runclaw_makeplots_dtopos.py`, which is executed
+by the slurm script.
 
 
 (geoclaw_on_tacc:production)=

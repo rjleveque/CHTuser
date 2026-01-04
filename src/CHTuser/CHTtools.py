@@ -98,15 +98,21 @@ def longname(event, delimiter='-'):
 
     return lname
 
-def name_conversions():
+def name_conversions(markdown_table=False):
 
     events = all_events()  # all 36 short names
-    print('List of events by event number, alphabetized by short name')
 
+    if markdown_table:
+        sep = '|'
+        print(f'{sep}event number {sep} event {sep} long name {sep}')
+        print(f'{sep} ---: {sep} :---: {sep} :--- {sep}')
+    else:
+        sep = ''
+        print('List of events by event number, alphabetized by short name')
     for k,event in enumerate(events):
         lname = longname(event)
         event_num = k+1
-        print(f'{event_num:4d}    {event}    {lname}')
+        print(f'{sep}{event_num:4d}  {sep}  {event}  {sep}  {lname} {sep}')
 
 
 def name_conversions_long_to_short():

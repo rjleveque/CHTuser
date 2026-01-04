@@ -110,6 +110,9 @@ Some files to be shared among collaborators can be found on TACC in
 If you plan to run GeoClaw yourself, see [](geoclaw_on_tacc) for more about
 these shared files.
 
+Files (such as topofiles or dtopofiles) found in this directory can also be
+downloaded to your own computer (if you have an account at TACC) using e.g.
+`rsync` or `scp`.
 
 :::{seealso}
 - [Managing I/O on TACC resources](https://docs.tacc.utexas.edu/tutorials/managingio/)
