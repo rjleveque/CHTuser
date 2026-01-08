@@ -70,7 +70,15 @@ record time series at a single gauge (over a very short run for illustration).
 The `setrun_case.py` file contains a main program that calls `setrun` with 
 `case={}` and creates the `*.data` files needed for GeoClaw
 so that these can be checked, if desired, before running multiple jobs with
-different dtopo files.  
+different dtopo files.  You can do this from the command line via:
+
+    python setrun_case.py
+
+or you can use the usual GeoClaw command:
+
+    make data
+
+since the `Makefile` in this directory is set to use `setrun_case.py`.
 
 This also creates the kml files showing e.g. the domain, topofile extents,
 gauge locations, etc. If you do this on TACC you will have to download the
@@ -124,15 +132,34 @@ A simple example with some documentation can be found in
 [`$CLAW/clawutil/examples/clawmultip_advection_1d_example1`](https://github.com/clawpack/clawutil/tree/master/examples/clawmultip_advection_1d_example1).
 :::
 
-This script can be run from the command line with a the syntax:
+On your laptop, 
+this script can be run from the command line with a the syntax:
 
     python runclaw_makeplots_dtopos.py <nprocs> <first_event> <last_event>
 
 where `<procs>` indicates how many geoclaw runs should be done in parallel,
 and `<first_event> <last_event>` indicates the range of events that should
-be used for the dtopo files, as explained further below.  On TACC,
-a Slurm script can be used that takes the same arguments to submit a job,
-see [](run-many-dtopos:slurm).
+be used for the dtopo files, as explained further below.  
+In particular, if you just want to run one event, say the `BL13D` event that
+is number 4 on [the list of ground
+motions](https://depts.washington.edu/ptha/CHTuser/docs/ground-motions/),
+then you could use:
+
+    python runclaw_makeplots_dtopos.py 1 4 4
+
+
+On TACC, if you are logged into a login node you should not run a GeoClaw
+job directly from the terminal. Moreover you may not have the required software
+installed to run this from a login shell.   The preferred way to run a job
+is to submit a batch job using the Slurm script
+`runm_geoclaw-test.slurm`, which takes the same arugments as the Python
+script when you submit the job:
+
+    sbatch runm_geoclaw-test.slurm <nprocs> <first_event> <last_event>
+
+These arguments are passed to `runclaw_makeplots_dtopos.py` within the
+script, and `<procs>` is also used to calculate how many OpenMP threads
+to use for each; see [](run-many-dtopos:slurm) for more discussion.
 
 In the script `runclaw_makeplots_dtopos.py`, you can
 set `dry_run = True` to just print out info about what will be done,
@@ -192,7 +219,7 @@ If the screen output from this looks ok, change to `dry_run = False`
 and submit a batch run using Slurm.
 
 (run-many-dtopos:slurm)=
-## The Slurm script for job submission
+## Slurm script for job submission
 
 The script
 [`$CHT/geoclaw_runs/tacc-test/runm_geoclaw-test.slurm`](https://github.com/rjleveque/CopesHubTsunamis/tree/main/geoclaw_runs/tacc-test/runm_geoclaw-test.slurm)
@@ -246,7 +273,7 @@ or by starting 3 jobs, each one running 6 dtopos in parallel:
 
     sbatch runm_geoclaw-test.slurm 6 1 6
     sbatch runm_geoclaw-test.slurm 6 7 12
-    sbatch runm_geoclaw-test.slurm 6 8 18
+    sbatch runm_geoclaw-test.slurm 6 13 18
 
 This will submit 3 jobs to the queue, each one using one node with 48 cores
 (with 8 OpenMP threads for each geoclaw run).
