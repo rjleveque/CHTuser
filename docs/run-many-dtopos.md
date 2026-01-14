@@ -326,8 +326,8 @@ contains some sets of dtopofiles:
 
   This subdirectory also contains 36 versions with names like
   `BL13D_instant.dtt3`, which contain the final static displacement at the
-  end of the earthquake, with the full displacement specified at time 0.
-  **(Currently at t=1 second, but we should change this.)**
+  end of the earthquake, with the full displacement specified at time `t = 1`
+  second.
 
 - Subdirectory `nosubevents_251229/dtopofiles` contains 18 static
   displacements with names like `BL13D_instant.dtt3` that were computed
@@ -341,8 +341,8 @@ contains some topfiles. *(Add more details.)*
 
 ### GeoClaw executables
 
-The directory `/work2/04137/rjl/CHTshare/clawpack-share/tacc` contains some
+The directory `/work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc` contains some
 geoclaw executables that can be used to run GeoClaw (provided you do not
 need to modify any of the Fortran code). See [](geoclaw_on_tacc:share) and
-the file `/work2/04137/rjl/CHTshare/clawpack-share/tacc/README.txt`
+the file `/work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc/README.txt`
 for more details.
