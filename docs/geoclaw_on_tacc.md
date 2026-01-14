@@ -47,36 +47,43 @@ If you don't need to change any of the Fortran code and/or are only
 using the Python tools in GeoClaw, it should be possible to share a single
 version of Clawpack and use the code an executable in
 
-    /work2/04137/rjl/CHTshare/clawpack-share
+    /work2/04137/rjl/CHTshare/clawpack-CHTshare
 
 To use this code, you should set the environment variable `CLAW` to point to
 this directory, and also `PYTHONPATH`, e.g.
 
-    export CLAW=/work2/04137/rjl/CHTshare/clawpack-share
+    export CLAW=/work2/04137/rjl/CHTshare/clawpack-CHTshare
     export PYTHONPATH=$CLAW
 
 You cannot compile the Fortran code in this version since that would require
 write access, but you can use an executable `xgeoclaw` that is archived in
 
-    /work2/04137/rjl/CHTshare/clawpack-share/tacc
+    /work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc
 
 For example, if running a single geoclaw job with a Makefile you could
 specify
 
-    EXE=/work2/04137/rjl/CHTshare/clawpack-share/tacc/xgeoclaw_251229
+    EXE=/work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc/xgeoclaw_260113
 
 or in the `runclaw_makeplots_dtopos.py` script described below in
 [](geoclaw_on_tacc:runclaw) you could set 
 
-    xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-share/tacc/xgeoclaw_251229'
+    xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc/xgeoclaw_260113'
 
 
 ## Installing your own version of Clawpack/GeoClaw:
 
 You can install your own version of [Clawpack](http://www.clawpack.org) on
 TACC.  You might want to install this in a directory `$HOME/clawpack_src` in
-case you need multiple versions of the Clawapck in the future.  Here's how
-you could install version v5.13.1, for example:
+case you need multiple versions of the Clawapck in the future.  
+
+:::{warning}
+GeoClaw v5.13.1 has a bug that will be fixed in v5.14.0.
+It has already been fixed in the version on TACC in
+`clawpack-CHTshare/tacc/xgeoclaw_260113`.
+:::
+
+Here's how you could install version v5.13.1, for example:
 
     mkdir -p $HOME/clawpack_src
     cd $HOME/clawpack_src
@@ -115,8 +122,12 @@ If you don't plan to change any Fortran code, you can make the executable
 once for all GeoClaw runs (updating it only if you want to change versions
 of GeoClaw).  For example, the sample `Makefile` found in
 [`$CHT/geoclaw_runs/tacc-test/Makefile`](https://github.com/rjleveque/CopesHubTsunamis/tree/main/geoclaw_runs/tacc-test/Makefile)
-creates an executable `$CHT/geoclaw_runs/xgeoclaw-v5.13.1`.
-
+creates an executable `$CHT/geoclaw_runs/xgeoclaw-share`.
+If you want to use this executable in doing the geoclaw runs, you will
+have to modify `xgeoclaw_path` in `runclaw_makeplots_dtopos.py`.
+You might want to give the executable a more descriptive name (including
+e.g. the Clawpack version number or creation date, in case you make different
+versions later).
 
 To run the script `runclaw_makeplots_dtopos.py` on a laptop or
 desktop, this can be done from the command line via e.g.:
