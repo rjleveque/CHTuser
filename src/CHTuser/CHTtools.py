@@ -5,6 +5,7 @@ Tools under development for the Cascadia CoPes Hub project
 """
 
 from pylab import *
+import os
 import xarray
 from scipy.interpolate import RegularGridInterpolator
 
@@ -419,11 +420,11 @@ def read_allgauges_nc(ncfile):
     return gauge_x, gauge_y, gauge_t, gauge_vals
 
 
-def make_all_gauges_nc(location, events, outdirs, gaugenos,
+def make_all_gauges_nc(location, events, geoclaw_outputs, gaugenos,
                        nc_fname=None, dt=5):
     """
     Make a netCDF file containing all specified `gaugnos` for all `events`.
-    Assumes `outdirs` has subdirectories with names like `_output_BL13D`.
+    Assumes `geoclaw_outputs` has subdirectories with names like `_output_BL13D`
     Uses pw linear interpolation with time increment `dt` for output.
     """
 
@@ -443,7 +444,7 @@ def make_all_gauges_nc(location, events, outdirs, gaugenos,
 
     missing = []
     for k,event in enumerate(events):
-        outdir = f'{outdirs}/_output_{event}'
+        outdir = f'{geoclaw_outputs}/_output_{event}'
         if not os.path.isdir(outdir):
             print(f'*** Skipping event {event},')
             print('***   no such outdir = ', outdir)
@@ -477,7 +478,7 @@ def make_all_gauges_nc(location, events, outdirs, gaugenos,
 
 
     for k,event in enumerate(events):
-        outdir = '%s/_output_%s'  % (outdirs,event)
+        outdir = '%s/_output_%s'  % (geoclaw_outputs,event)
         for j,gaugeno in enumerate(gaugenos):
             gauge = gauges.GaugeSolution(gaugeno, outdir)
             t = gauge.t
