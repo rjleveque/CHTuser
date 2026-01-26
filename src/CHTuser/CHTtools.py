@@ -429,6 +429,9 @@ def make_all_gauges_nc(location, events, geoclaw_outputs, gaugenos,
     """
 
     from clawpack.pyclaw import gauges
+    from scipy.interpolate import interp1d
+    import netCDF4
+    import time as time_module
 
     drytol = 1e-3  # set u=v=0 where h < drytol when computing from hu,hv
 
@@ -501,14 +504,14 @@ def make_all_gauges_nc(location, events, geoclaw_outputs, gaugenos,
             gaugefcn = interp1d(t, h, kind='linear', bounds_error=False)
             gauge_results[:,j,0,k] = gaugefcn(tg)
 
-            u = numpy.divide(gauge.q[1,:], h,
-                              out=numpy.zeros(h.shape, dtype=float), \
+            u = divide(gauge.q[1,:], h,
+                              out=zeros(h.shape, dtype=float), \
                               where=(h>drytol))
             gaugefcn = interp1d(t, u, kind='linear', bounds_error=False)
             gauge_results[:,j,1,k] = gaugefcn(tg)
 
-            v = numpy.divide(gauge.q[2,:], h,
-                              out=numpy.zeros(h.shape, dtype=float), \
+            v = divide(gauge.q[2,:], h,
+                              out=zeros(h.shape, dtype=float), \
                               where=(h>drytol))
             gaugefcn = interp1d(t, v, kind='linear', bounds_error=False)
             gauge_results[:,j,2,k] = gaugefcn(tg)
