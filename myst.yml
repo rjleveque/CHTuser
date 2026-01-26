@@ -37,6 +37,7 @@ project:
         - file: docs/intro_gauges.md
         - file: sites/Newport/LoadGaugesNewport.ipynb
         - file: sites/WestportBridges/LoadGaugesWestportBridges.ipynb
+        - file: sites/GraysHarborBridges/LoadGaugesGH.ipynb
     - title: Resources
       children:
         - file: docs/intro_resources.md
