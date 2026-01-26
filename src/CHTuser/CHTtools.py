@@ -428,6 +428,8 @@ def make_all_gauges_nc(location, events, geoclaw_outputs, gaugenos,
     Uses pw linear interpolation with time increment `dt` for output.
     """
 
+    from clawpack.pyclaw import gauges
+
     drytol = 1e-3  # set u=v=0 where h < drytol when computing from hu,hv
 
     # quantities of interest:
