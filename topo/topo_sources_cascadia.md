@@ -1,0 +1,294 @@
+
+# Topo files for Cascadia 
+
+Topography DEMs can be found in various places within the [NCEI website](https://www.ncei.noaa.gov/),
+see [Improving Coastal Resiliency with Digital Elevation Models](http://ncei.noaa.gov/news/improving-coastal-resiliency-digital-elevation-models) for an overview.
+
+The "Data URLs" listed below can be used to download a DEM directly from a THREDDS server, e.g. using
+the GeoClaw Python tool
+
+      topo = clawpack.geoclaw.topotools.read_netcdf(data_url)
+
+to download the entire file at full resolution. 
+
+See the [topotools documentation](https://www.clawpack.org/topo.html#netcdf-format) and
+[read_netcdf documentation](https://www.clawpack.org/topotools_module.html#clawpack.geoclaw.topotools.read_netcdf)
+for other arguments to this function, to download a subset, subsample the resolution, etc.
+and information on the object returned by this function.
+
+## Global ocean topography
+
+We are mostly using [etopo 2022 15 arcsecond (15") topography](https://data.noaa.gov/metaview/page?xml=NOAA/NESDIS/NGDC/MGG/DEM//iso/xml/etopo_2022.xml&view=getDataView&header=none),
+typically by downloading data at the 30" resolution or coarser directly from the THREDDS server,
+
+Data URL: https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/30s/30s_bed_elev_netcdf/ETOPO_2022_v1_30s_N90W180_bed.nc
+
+
+
+## General NCEI catalog
+
+https://www.ngdc.noaa.gov/thredds/catalog/demCatalog.html
+
+### Coastal Relief Model
+
+Catalog: https://www.ngdc.noaa.gov/thredds/catalog/crm/catalog.html
+
+contains Coastal Relief Model by volume, including vol8 for Pacific Northwest:
+
+Data URL: https://www.ngdc.noaa.gov/thredds/dodsC/crm/crm_vol8.nc
+
+     crm_vol8.nc	 345.8 Mbytes	2010-09-16T18:28:47Z
+
+
+### thredds/catalog/regional
+
+Catalog: https://www.ngdc.noaa.gov/thredds/catalog/regional/catalog.html
+
+contains e.g.
+
+      la_push_13_mhw_2007.nc
+      astoria_13_mhw_2012.nc
+      grays_harbor_P280_2018.nc
+
+
+### thredds/dodsC/pmel
+
+Catalog: https://www.ngdc.noaa.gov/thredds/catalog/pmel/catalog.html
+
+Data URL: https://www.ngdc.noaa.gov/thredds/dodsC/pmel/ + filename.nc
+
+Mostly (all?) referenced to MHW?
+
+Contains various locations, dating from 2016, for A,B,C MOST grids
+including:
+   (A: 54.5", B: 30", C: 16.522" in x, 9" in y)
+
+      BritishColumbia_A.nc	 385.5 Kbytes	2016-06-01T20:56:44Z
+      BritishColumbia_B.nc	 2.797 Mbytes	2016-06-01T20:56:52Z
+      BritishColumbia_C.nc	 181.9 Kbytes	2016-06-01T20:57:00Z
+
+and for other locations, some in Cascadia:
+    (some have resolutions A: 3 arcmin, B: 18 arcsec, C: 1/5" in x, 1/3" in y)
+
+      CrescentCityCA
+      EurekaCA
+      LaPushWA
+      NeaBayWA
+      NewportOR
+      etc
+
+## CUDEM tiles
+
+Continuously Updated DEMs (CUDEMs) are provided on 0.25 degree by 0.25 degree 
+rectangles, typically named based on the latitude and longitude of the
+upper left corner along with some information about the date it was released.
+
+Tiles are available some places at both 1/3" and more recently at 1/9"
+resolution (the latter is about 2m by 3m horizontal resolution at the latitude
+of Cascadia).
+
+These tiles are generally referenced to NAVD88 as the vertical datum, although
+some data sets are referenced to MHW (particularly in directories that include
+`nthmp` in their name, since these were custom made for tsunami modeling).
+
+These tiles are typically available only for the rectangles that are
+intersected by the coastline.
+
+### thredds/dodsC/tiles/tiled_19as
+
+Catalog: https://www.ngdc.noaa.gov/thredds/catalog/tiles/tiled_19as/catalog.html
+
+Data URL: https://www.ngdc.noaa.gov/thredds/dodsC/tiles/tiled_19as/ + filename.nc
+
+Contains the following in Cascadia:
+
+      ncei19_n47x00_w0124x00_2018v1.nc	 166.0 Mbytes	2019-02-07T20:35:13Z
+      ncei19_n47x00_w0124x25_2018v1.nc	 156.2 Mbytes	2019-02-07T20:35:45Z
+      ncei19_n47x25_w0124x25_2018v1.nc	 158.1 Mbytes	2019-02-07T20:36:19Z
+      ncei19_n47x50_w0124x25_2018v1.nc	 155.9 Mbytes	2019-02-07T20:36:52Z
+      ncei19_n47x50_w0124x50_2018v1.nc	 139.4 Mbytes	2019-02-07T20:37:24Z
+      ncei19_n47x75_w0124x50_2018v1.nc	 146.2 Mbytes	2019-02-07T20:38:04Z
+      ncei19_n48x00_w0124x50_2018v1.nc	 150.9 Mbytes	2019-02-07T20:38:49Z
+      ncei19_n48x00_w0124x75_2018v1.nc	 138.8 Mbytes	2019-02-07T20:39:32Z
+      ncei19_n48x25_w0124x75_2018v1.nc	 156.8 Mbytes	2019-02-07T20:40:16Z
+      ncei19_n48x50_w0124x75_2018v1.nc	 140.7 Mbytes	2019-02-07T20:40:59Z
+      ncei19_n48x75_w122x50_2017v1.nc	 263.3 Mbytes	2018-05-23T17:49:27Z
+      ncei19_n48x75_w122x75_2017v1.nc	 263.3 Mbytes	2018-05-23T17:49:28Z
+      ncei19_n48x75_w123x00_2017v1.nc	 263.3 Mbytes	2018-05-23T17:49:29Z
+      ncei19_n49x00_w122x50_2017v1.nc	 263.3 Mbytes	2018-05-23T17:49:32Z
+      ncei19_n49x00_w122x75_2019v2.nc	 157.8 Mbytes	2019-05-21T17:51:55Z
+      ncei19_n49x00_w123x00_2019v2.nc	 147.1 Mbytes	2019-05-21T17:51:27Z
+
+### thredds/dodsC/tiles/tiled_13as
+
+Catalog: https://www.ngdc.noaa.gov/thredds/catalog/tiles/tiled_13as/catalog.html
+
+Data URL: https://www.ngdc.noaa.gov/thredds/dodsC/tiles/tiled_13as/ + filename.nc
+
+Contains the following in Cascadia:
+
+      ncei13_n47x25_w0124x50_2018v1.nc	 15.48 Mbytes	2019-02-07T20:12:10Z
+      ncei13_n47x75_w0124x75_2018v1.nc	 14.88 Mbytes	2019-02-07T20:12:13Z
+      ncei13_n48x25_w0125x00_2018v1.nc	 15.61 Mbytes	2019-02-07T20:12:16Z
+      ncei13_n48x50_w0125x00_2018v1.nc	 15.93 Mbytes	2019-02-07T20:12:19Z
+
+### thredds/dodsC/tiles/nthmp
+
+Catalog: https://www.ngdc.noaa.gov/thredds/catalog/tiles/nthmp/tiled_19as/catalog.html
+
+Data URL: https://www.ngdc.noaa.gov/thredds/dodsC/tiles/nthmp/tiled_19as/ + filename.nc
+
+Some are MHW, others have navd88 in name
+
+Contains the following in Cascadia:
+
+      juan_de_fuca_mhw_g19_n48x25_w123x25_2021v1.nc	 145.5 Mbytes	2021-04-12T00:04:53Z
+      juan_de_fuca_mhw_g19_n48x25_w123x50_2021v1.nc	 139.5 Mbytes	2021-04-12T00:06:08Z
+      juan_de_fuca_mhw_g19_n48x25_w123x75_2021v1.nc	 136.3 Mbytes	2021-04-12T00:07:29Z
+      juan_de_fuca_mhw_g19_n48x25_w124x00_2021v1.nc	 136.2 Mbytes	2021-04-12T00:08:47Z
+      juan_de_fuca_mhw_g19_n48x25_w124x25_2021v1.nc	 151.1 Mbytes	2021-04-12T00:10:07Z
+      juan_de_fuca_mhw_g19_n48x25_w124x50_2021v1.nc	 154.5 Mbytes	2021-04-12T01:28:02Z
+      juan_de_fuca_mhw_g19_n48x50_w124x25_2021v1.nc	 126.6 Mbytes	2021-04-12T00:14:13Z
+      juan_de_fuca_mhw_g19_n48x50_w124x50_2021v1.nc	 133.4 Mbytes	2021-04-12T00:15:17Z
+      ncei19_n42x00_w124x25_navd88_2021.nc	 148.8 Mbytes	2023-03-24T20:44:59.043Z
+      ncei19_n42x00_w124x50_navd88_2021.nc	 123.7 Mbytes	2023-03-24T20:45:00.828Z
+      ncei19_n42x25_w124x25_navd88_2021.nc	 149.7 Mbytes	2023-03-24T20:45:02.887Z
+      ncei19_n42x25_w124x50_navd88_2021.nc	 132.9 Mbytes	2023-03-24T20:45:04.677Z
+      ncei19_n42x50_w124x50_navd88_2021.nc	 146.1 Mbytes	2023-03-24T20:45:07.068Z
+      ncei19_n42x50_w124x75_navd88_2021.nc	 121.1 Mbytes	2023-03-24T20:45:08.898Z
+      ncei19_n42x75_w124x50_navd88_2021.nc	 147.3 Mbytes	2023-03-24T20:45:10.949Z
+      ncei19_n42x75_w124x75_navd88_2021.nc	 123.7 Mbytes	2023-03-24T20:45:12.798Z
+      ncei19_n43x00_w124x50_navd88_2021.nc	 152.8 Mbytes	2023-03-24T20:45:15.475Z
+      ncei19_n43x00_w124x75_navd88_2021.nc	 130.3 Mbytes	2023-03-24T20:45:17.590Z
+      ncei19_n43x25_w124x50_navd88_2021.nc	 155.6 Mbytes	2023-03-24T20:45:19.497Z
+      ncei19_n43x25_w124x75_navd88_2021.nc	 120.7 Mbytes	2023-03-24T20:45:21.396Z
+      ncei19_n43x50_w124x25_navd88_2021.nc	 166.6 Mbytes	2023-03-24T20:45:23.490Z
+      ncei19_n43x50_w124x50_navd88_2021.nc	 140.7 Mbytes	2023-03-24T20:45:25.746Z
+      ncei19_n43x75_w124x00_navd88_2021.nc	 159.0 Mbytes	2023-03-24T21:02:55.056Z
+      ncei19_n43x75_w124x25_navd88_2021.nc	 167.0 Mbytes	2023-03-24T21:02:58.126Z
+      ncei19_n43x75_w124x50_navd88_2021.nc	 107.6 Mbytes	2023-03-24T21:02:58.784Z
+      ncei19_n44x00_w124x00_navd88_2021.nc	 161.4 Mbytes	2023-03-24T21:02:59.720Z
+      ncei19_n44x00_w124x25_navd88_2021.nc	 156.3 Mbytes	2023-03-24T21:03:00.496Z
+      ncei19_n44x00_w124x50_navd88_2021.nc	 104.5 Mbytes	2023-03-24T21:03:01.122Z
+      ncei19_n44x25_w124x00_navd88_2021.nc	 161.2 Mbytes	2023-03-24T22:07:34.418Z
+      ncei19_n44x25_w124x25_navd88_2021.nc	 145.2 Mbytes	2023-03-24T22:07:35.119Z
+      ncei19_n44x50_w124x00_navd88_2021.nc	 157.3 Mbytes	2023-03-24T22:07:35.807Z
+      ncei19_n44x50_w124x25_navd88_2021.nc	 140.2 Mbytes	2023-03-24T22:07:36.515Z
+      ncei19_n44x75_w124x00_navd88_2021.nc	 160.1 Mbytes	2023-03-24T22:07:39.474Z
+      ncei19_n44x75_w124x25_navd88_2021.nc	 142.7 Mbytes	2023-03-24T22:07:40.284Z
+      ncei19_n45x00_w124x00_navd88_2021.nc	 156.3 Mbytes	2023-03-24T22:07:41.733Z
+      ncei19_n45x00_w124x25_navd88_2021.nc	 133.3 Mbytes	2023-03-24T22:07:42.511Z
+      ncei19_n45x25_w124x00_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:00.012Z
+      ncei19_n45x25_w124x25_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:03.150Z
+      ncei19_n45x50_w124x00_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:05.018Z
+      ncei19_n45x50_w124x25_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:06.759Z
+      ncei19_n45x75_w124x00_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:09.004Z
+      ncei19_n45x75_w124x25_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:10.814Z
+      ncei19_n46x00_w124x00_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:12.671Z
+      ncei19_n46x00_w124x25_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:14.350Z
+      ncei19_n46x25_w124x00_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:16.907Z
+      ncei19_n46x25_w124x25_2019v1.nc	 263.3 Mbytes	2023-08-11T15:56:18.871Z
+      ncei19_n47x25_w0124x25_2020.nc	 159.1 Mbytes	2020-06-08T21:58:24Z
+      ncei19_n47x50_w0124x25_2020.nc	 143.1 Mbytes	2020-06-02T17:20:32Z
+      ncei19_n47x50_w0124x50_2020.nc	 136.6 Mbytes	2020-06-08T21:56:54Z
+      ncei19_n47x75_w0124x50_2020.nc	 147.1 Mbytes	2020-06-02T17:18:36Z
+      ncei19_n48x00_w0124x50_2020.nc	 157.1 Mbytes	2020-06-02T17:17:44Z
+      ncei19_n48x00_w0124x75_2020.nc	 136.9 Mbytes	2020-06-02T17:16:40Z
+      ncei19_n48x25_w0124x75_2020.nc	 159.1 Mbytes	2020-06-02T17:12:46Z
+      ncei19_n48x50_w0124x75_2020.nc	 143.2 Mbytes	2020-06-02T17:10:50Z
+      ncei19_n48x75_w122x50_mhw_2020_v3.nc	 131.4 Mbytes	2020-02-25T16:29:26Z
+      ncei19_n48x75_w122x75_mhw_2020_v3.nc	 128.8 Mbytes	2020-02-25T16:29:16Z
+      ncei19_n48x75_w123x00_mhw_2020_v3.nc	 132.5 Mbytes	2020-02-25T16:29:09Z
+      ncei19_n49x00_w122x50_mhw_2020_v3.nc	 125.3 Mbytes	2020-02-25T16:29:02Z
+      ncei19_n49x00_w122x75_mhw_2020_v3.nc	 136.5 Mbytes	2020-02-25T16:28:46Z
+      ncei19_n49x00_w123x00_mhw_2020_v3.nc	 122.1 Mbytes	2020-02-25T16:28:55Z
+      tillamook19_n46x24_w123x99_2021v3.nc	 171.8 Mbytes	2023-08-17T14:09:44.214Z
+      tillamook19_n46x24_w124x24_2021v3.nc	 131.2 Mbytes	2023-08-17T14:10:07.987Z
+
+## tif files
+
+### coast.noaa.gov/htdata/raster2
+
+Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/
+
+Data URL: Not on thredds server, click on .tif file to download
+
+Contains the following in Cascadia:
+
+      OR/index.html (2.54 KB)
+      OR/ncei19_n43x75_w124x00_2021v1.tif (152.15 MB)
+      OR/ncei19_n43x75_w124x25_2021v1.tif (155.91 MB)
+      OR/ncei19_n43x75_w124x50_2021v1.tif (86.61 MB)
+      OR/ncei19_n44x00_w124x00_2021v1.tif (154.17 MB)
+      OR/ncei19_n44x00_w124x25_2021v1.tif (141.86 MB)
+      OR/ncei19_n44x00_w124x50_2021v1.tif (83.32 MB)
+      OR/ncei19_n44x25_w124x00_2021v1.tif (155.49 MB)
+      OR/ncei19_n44x25_w124x25_2021v1.tif (129.38 MB)
+      OR/ncei19_n44x50_w124x00_2021v1.tif (151.46 MB)
+      OR/ncei19_n44x50_w124x25_2021v1.tif (122.08 MB)
+      OR/ncei19_n44x75_w124x00_2021v1.tif (152.83 MB)
+      OR/ncei19_n44x75_w124x25_2021v1.tif (122.33 MB)
+      OR/ncei19_n45x00_w124x00_2021v1.tif (149.65 MB)
+      OR/ncei19_n45x00_w124x25_2021v1.tif (111.79 MB)
+
+      wash_bellingham/index.html (2.36 KB)
+      wash_bellingham/ncei19_n48x50_w122x50_2024v1.tif (209.14 MB)
+      wash_bellingham/ncei19_n48x50_w122x75_2024v1.tif (199.92 MB)
+      wash_bellingham/ncei19_n48x50_w123x00_2024v1.tif (182.50 MB)
+      wash_bellingham/ncei19_n48x50_w123x25_2024v1.tif (177.68 MB)
+      wash_bellingham/ncei19_n48x75_w122x50_2017v1.tif (200.51 MB)
+      wash_bellingham/ncei19_n48x75_w122x75_2017v1.tif (197.42 MB)
+      wash_bellingham/ncei19_n48x75_w123x00_2017v1.tif (197.91 MB)
+      wash_bellingham/ncei19_n48x75_w123x25_2024v1.tif (190.54 MB)
+      wash_bellingham/ncei19_n49x00_w122x50_2017v1.tif (195.16 MB)
+      wash_bellingham/ncei19_n49x00_w122x75_2017v1.tif (203.96 MB)
+      wash_bellingham/ncei19_n49x00_w123x00_2017v1.tif (182.19 MB)
+      wash_bellingham/ncei19_n49x00_w123x25_2024v1.tif (171.20 MB)
+      wash_juandefuca/index.html (2.08 KB)
+      wash_juandefuca/ncei19_n48x25_w123x00_2024v2.tif (183.93 MB)
+      wash_juandefuca/ncei19_n48x25_w123x25_2021v1.tif (130.02 MB)
+      wash_juandefuca/ncei19_n48x25_w123x50_2021v1.tif (121.50 MB)
+      wash_juandefuca/ncei19_n48x25_w123x75_2021v1.tif (120.92 MB)
+      wash_juandefuca/ncei19_n48x25_w124x00_2021v1.tif (120.47 MB)
+      wash_juandefuca/ncei19_n48x25_w124x25_2021v1.tif (140.25 MB)
+      wash_juandefuca/ncei19_n48x25_w124x50_2021v1.tif (147.06 MB)
+      wash_juandefuca/ncei19_n48x50_w124x25_2021v1.tif (100.65 MB)
+      wash_juandefuca/ncei19_n48x50_w124x50_2021v1.tif (109.44 MB)
+      wash_outercoast/index.html (2.54 KB)
+      wash_outercoast/ncei19_n47x00_w0124x00_2018v1.tif (207.21 MB)
+      wash_outercoast/ncei19_n47x00_w0124x25_2018v1.tif (187.27 MB)
+      wash_outercoast/ncei19_n47x25_w0124x25_2018v1.tif (195.08 MB)
+      wash_outercoast/ncei19_n47x50_w0124x25_2018v1.tif (200.55 MB)
+      wash_outercoast/ncei19_n47x50_w0124x50_2018v1.tif (158.97 MB)
+      wash_outercoast/ncei19_n47x75_w0124x50_2018v1.tif (176.32 MB)
+      wash_outercoast/ncei19_n48x00_w0124x50_2018v1.tif (189.39 MB)
+      wash_outercoast/ncei19_n48x00_w0124x75_2018v1.tif (163.14 MB)
+      wash_outercoast/ncei19_n48x25_w0124x75_2018v1.tif (196.46 MB)
+      wash_outercoast/ncei19_n48x50_w0124x75_2018v1.tif (165.07 MB)
+      wash_outercoast/wa_outercoast_topobathy_19.dbf (1.97 KB)
+      wash_outercoast/wa_outercoast_topobathy_19.prj (287 B)
+      wash_outercoast/wa_outercoast_topobathy_19.shp (1.43 KB)
+      wash_outercoast/wa_outercoast_topobathy_19.shx (180 B)
+      wash_pugetsound/index.html (3.30 KB)
+      wash_pugetsound/ncei19_n47x25_w122x25_2024v1.tif (180.09 MB)
+      wash_pugetsound/ncei19_n47x25_w122x50_2024v1.tif (183.20 MB)
+      wash_pugetsound/ncei19_n47x25_w122x75_2024v1.tif (193.70 MB)
+      wash_pugetsound/ncei19_n47x25_w123x00_2024v1.tif (201.39 MB)
+      wash_pugetsound/ncei19_n47x25_w123x25_2024v1.tif (194.52 MB)
+      wash_pugetsound/ncei19_n47x50_w122x25_2023v1.tif (190.66 MB)
+      wash_pugetsound/ncei19_n47x50_w122x50_2023v1.tif (191.52 MB)
+      wash_pugetsound/ncei19_n47x50_w122x75_2023v1.tif (198.15 MB)
+      wash_pugetsound/ncei19_n47x50_w123x00_2023v1.tif (199.95 MB)
+      wash_pugetsound/ncei19_n47x50_w123x25_2023v1.tif (194.95 MB)
+      wash_pugetsound/ncei19_n47x75_w122x25_2023v1.tif (194.27 MB)
+      wash_pugetsound/ncei19_n47x75_w122x50_2023v1.tif (189.51 MB)
+      wash_pugetsound/ncei19_n47x75_w122x75_2023v1.tif (204.33 MB)
+      wash_pugetsound/ncei19_n47x75_w123x00_2023v1.tif (191.95 MB)
+      wash_pugetsound/ncei19_n47x75_w123x25_2023v1.tif (185.66 MB)
+      wash_pugetsound/ncei19_n48x00_w122x25_2023v1.tif (202.19 MB)
+      wash_pugetsound/ncei19_n48x00_w122x50_2023v1.tif (184.33 MB)
+      wash_pugetsound/ncei19_n48x00_w122x75_2023v1.tif (196.52 MB)
+      wash_pugetsound/ncei19_n48x00_w123x00_2023v1.tif (194.17 MB)
+      wash_pugetsound/ncei19_n48x25_w122x25_2024v1.tif (195.59 MB)
+      wash_pugetsound/ncei19_n48x25_w122x50_2024v1.tif (195.53 MB)
+      wash_pugetsound/ncei19_n48x25_w122x75_2024v1.tif (190.85 MB)

@@ -15,16 +15,23 @@ project:
     - file: intro.md
     - title: Overview and introduction
       children:
+        - file: intro.md
         - file: docs/python_env.md
         - file: docs/Test.ipynb
         - file: docs/prerequisites.md
           children:
             - file: /docs/python_environment.md
         - file: docs/workflow.md
-    - title: Ground motions / dtopo
+        - file: docs/geoclaw_on_tacc.md
+        - file: docs/run-many-dtopos.md
+    - title: Ground motions / dtopo files
       children:
         - file: docs/ground_motions.md
         - file: dtopo/GroundMotions.ipynb
+    - title: Topography DEMs / topo files
+      children:
+        - file: topo/README.md
+        - file: topo/topo_sources_cascadia.md
     - title: GaugeOutput
       children:
         - file: docs/intro_gauges.md

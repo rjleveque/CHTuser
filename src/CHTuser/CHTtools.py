@@ -5,6 +5,7 @@ Tools under development for the Cascadia CoPes Hub project
 """
 
 from pylab import *
+import os
 import xarray
 from scipy.interpolate import RegularGridInterpolator
 
@@ -22,8 +23,10 @@ def all_events():
     # add ft events:
     all_events += [e.replace('B','F') for e in all_events]
 
-    return all_events
+    all_events.sort()
 
+    return all_events
+    
 
 def shortname(event):
     """
@@ -58,7 +61,62 @@ def shortname(event):
 
     return newname
 
-def name_conversions():
+def longname(event, delimiter='-'):
+    if (event[0] not in 'BF') or (event[1] not in 'LR') \
+        or (event[4] not in 'DMS'):
+        print(f'*** problem converting {event}, expecting e.g. "BL10D"')
+        return ''
+
+    if event[0] == 'B':
+        lname = f'buried{delimiter}'
+    else:
+        lname = f'ft{delimiter}'
+
+    if event[1] == 'L':
+        lname += f'locking{delimiter}'
+    else:
+        lname += f'random{delimiter}'
+
+    if event[2:4] == '10':
+        lname += f'str10{delimiter}'
+    elif event[2:4] == '13':
+        lname += f'mur13{delimiter}'
+    elif event[2:4] == '16':
+        lname += f'skl16{delimiter}'
+    else:
+        print(f'*** problem converting {event}, expecting e.g. "BL10D"')
+        return ''
+
+    if event[4] == 'D':
+        lname += f'deep'
+    elif event[4] == 'M':
+        lname += f'middle'
+    else:
+        lname += f'shallow'
+
+    if event[-8:] == '_instant':
+        lname += '_instant'
+
+    return lname
+
+def name_conversions(markdown_table=False):
+
+    events = all_events()  # all 36 short names
+
+    if markdown_table:
+        sep = '|'
+        print(f'{sep}event number {sep} event {sep} long name {sep}')
+        print(f'{sep} ---: {sep} :---: {sep} :--- {sep}')
+    else:
+        sep = ''
+        print('List of events by event number, alphabetized by short name')
+    for k,event in enumerate(events):
+        lname = longname(event)
+        event_num = k+1
+        print(f'{sep}{event_num:4d}  {sep}  {event}  {sep}  {lname} {sep}')
+
+
+def name_conversions_long_to_short():
     models = \
        ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
         'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
@@ -70,6 +128,9 @@ def name_conversions():
 
     events = events + [e.replace('buried','ft') for e in events]
     events.sort()
+
+    print('List of events, alphabetized by long name')
+
     for event in events:
         #print(f'  {event.ljust(30)} --> {shortname(event)}')
         print(f'  {shortname(event)} = {event}')
@@ -359,13 +420,18 @@ def read_allgauges_nc(ncfile):
     return gauge_x, gauge_y, gauge_t, gauge_vals
 
 
-def make_all_gauges_nc(location, events, outdirs, gaugenos,
+def make_all_gauges_nc(location, events, geoclaw_outputs, gaugenos,
                        nc_fname=None, dt=5):
     """
     Make a netCDF file containing all specified `gaugnos` for all `events`.
-    Assumes `outdirs` has subdirectories with names like `_output_BL13D`.
+    Assumes `geoclaw_outputs` has subdirectories with names like `_output_BL13D`
     Uses pw linear interpolation with time increment `dt` for output.
     """
+
+    from clawpack.pyclaw import gauges
+    from scipy.interpolate import interp1d
+    import netCDF4
+    import time as time_module
 
     drytol = 1e-3  # set u=v=0 where h < drytol when computing from hu,hv
 
@@ -383,7 +449,7 @@ def make_all_gauges_nc(location, events, outdirs, gaugenos,
 
     missing = []
     for k,event in enumerate(events):
-        outdir = f'{outdirs}/_output_{event}'
+        outdir = f'{geoclaw_outputs}/_output_{event}'
         if not os.path.isdir(outdir):
             print(f'*** Skipping event {event},')
             print('***   no such outdir = ', outdir)
@@ -417,7 +483,7 @@ def make_all_gauges_nc(location, events, outdirs, gaugenos,
 
 
     for k,event in enumerate(events):
-        outdir = '%s/_output_%s'  % (outdirs,event)
+        outdir = '%s/_output_%s'  % (geoclaw_outputs,event)
         for j,gaugeno in enumerate(gaugenos):
             gauge = gauges.GaugeSolution(gaugeno, outdir)
             t = gauge.t
@@ -438,14 +504,14 @@ def make_all_gauges_nc(location, events, outdirs, gaugenos,
             gaugefcn = interp1d(t, h, kind='linear', bounds_error=False)
             gauge_results[:,j,0,k] = gaugefcn(tg)
 
-            u = numpy.divide(gauge.q[1,:], h,
-                              out=numpy.zeros(h.shape, dtype=float), \
+            u = divide(gauge.q[1,:], h,
+                              out=zeros(h.shape, dtype=float), \
                               where=(h>drytol))
             gaugefcn = interp1d(t, u, kind='linear', bounds_error=False)
             gauge_results[:,j,1,k] = gaugefcn(tg)
 
-            v = numpy.divide(gauge.q[2,:], h,
-                              out=numpy.zeros(h.shape, dtype=float), \
+            v = divide(gauge.q[2,:], h,
+                              out=zeros(h.shape, dtype=float), \
                               where=(h>drytol))
             gaugefcn = interp1d(t, v, kind='linear', bounds_error=False)
             gauge_results[:,j,2,k] = gaugefcn(tg)
