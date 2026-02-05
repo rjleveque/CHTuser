@@ -135,6 +135,25 @@ def name_conversions_long_to_short():
         #print(f'  {event.ljust(30)} --> {shortname(event)}')
         print(f'  {shortname(event)} = {event}')
 
+def logic_tree_weights():
+
+    event_weights = {}
+    for event in all_events():
+        w = 1/3 * 0.5
+        if 'B' in event:
+            w *= 0.75
+        else:
+            w *= 0.25
+        if 'D' in event:
+            w *= 0.3
+        elif 'M' in event:
+            w *= 0.5
+        else:
+            w*=0.2
+        event_weights[event] = w
+
+    return event_weights
+
 
 class TsunamiModelResults(object):
 
