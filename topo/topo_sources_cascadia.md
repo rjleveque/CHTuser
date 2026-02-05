@@ -1,5 +1,5 @@
 
-# Topo files for Cascadia 
+# Topo files for Cascadia
 
 Topography DEMs can be found in various places within the [NCEI website](https://www.ncei.noaa.gov/),
 see [Improving Coastal Resiliency with Digital Elevation Models](http://ncei.noaa.gov/news/improving-coastal-resiliency-digital-elevation-models) for an overview.
@@ -9,7 +9,7 @@ the GeoClaw Python tool
 
       topo = clawpack.geoclaw.topotools.read_netcdf(data_url)
 
-to download the entire file at full resolution. 
+to download the entire file at full resolution.
 
 See the [topotools documentation](https://www.clawpack.org/topo.html#netcdf-format) and
 [read_netcdf documentation](https://www.clawpack.org/topotools_module.html#clawpack.geoclaw.topotools.read_netcdf)
@@ -79,7 +79,7 @@ and for other locations, some in Cascadia:
 
 ## CUDEM tiles
 
-Continuously Updated DEMs (CUDEMs) are provided on 0.25 degree by 0.25 degree 
+Continuously Updated DEMs (CUDEMs) are provided on 0.25 degree by 0.25 degree
 rectangles, typically named based on the latitude and longitude of the
 upper left corner along with some information about the date it was released.
 
@@ -202,6 +202,61 @@ Contains the following in Cascadia:
       ncei19_n49x00_w122x50_mhw_2020_v3.nc	 125.3 Mbytes	2020-02-25T16:29:02Z
       ncei19_n49x00_w122x75_mhw_2020_v3.nc	 136.5 Mbytes	2020-02-25T16:28:46Z
       ncei19_n49x00_w123x00_mhw_2020_v3.nc	 122.1 Mbytes	2020-02-25T16:28:55Z
+      ncei19_n58x50_w135x75_2024v1.nc	 145.9 Mbytes	2025-11-03T17:14:40Z
+      ncei19_n58x50_w136x00_2024v1.nc	 145.3 Mbytes	2025-11-03T17:14:59Z
+      ncei19_n59x75_w152x00_2022v1.nc	 126.8 Mbytes	2025-10-28T16:11:57.252Z
+      ncei19_n60x00_w151x75_2022v1.nc	 136.1 Mbytes	2025-10-28T16:11:57.951Z
+      ncei19_n60x00_w152x00_2022v1.nc	 129.6 Mbytes	2025-10-28T16:11:58.618Z
+      ncei19_n60x25_w151x50_2022v1.nc	 136.4 Mbytes	2025-10-28T16:11:59.317Z
+      ncei19_n60x25_w151x75_2022v1.nc	 130.8 Mbytes	2025-10-28T16:11:59.906Z
+      ncei19_n60x25_w152x00_2022v1.nc	 117.6 Mbytes	2025-10-28T16:12:00.719Z
+      ncei19_n60x50_w151x25_2022v1.nc	 139.7 Mbytes	2025-10-28T16:12:01.500Z
+      ncei19_n60x50_w151x50_2022v1.nc	 137.9 Mbytes	2025-10-28T16:12:02.189Z
+      ncei19_n60x75_w151x25_2022v1.nc	 144.4 Mbytes	2025-10-28T16:12:02.877Z
+      ncei19_n60x75_w151x50_2022v1.nc	 140.4 Mbytes	2025-10-28T16:12:03.532Z
+      ncei19_n64x50_w165x50_2024v1.nc	 124.6 Mbytes	2025-12-08T14:39:39.117Z
+      ncei19_n64x50_w165x75_2024v1.nc	 119.5 Mbytes	2025-12-08T14:39:39.813Z
+      ncei19_n64x75_w165x50_2024v1.nc	 146.7 Mbytes	2025-12-08T14:39:40.709Z
+      ncei19_n64x75_w165x75_2024v1.nc	 145.6 Mbytes	2025-12-08T14:39:41.486Z
+      puget_sound_mhw_19_n47x25_w122x25_2024v1.nc	 143.2 Mbytes	2024-01-06T15:11:50Z
+      puget_sound_mhw_19_n47x25_w122x50_2024v1.nc	 145.6 Mbytes	2024-01-06T15:11:39Z
+      puget_sound_mhw_19_n47x25_w122x75_2024v1.nc	 152.8 Mbytes	2024-01-06T15:11:30Z
+      puget_sound_mhw_19_n47x25_w123x00_2024v1.nc	 159.0 Mbytes	2024-01-06T15:11:12Z
+      puget_sound_mhw_19_n47x25_w123x25_2024v1.nc	 154.0 Mbytes	2024-01-06T15:10:50Z
+      puget_sound_mhw_19_n47x50_w122x25_2023v1.nc	 151.2 Mbytes	2023-06-11T15:14:36Z
+      puget_sound_mhw_19_n47x50_w122x50_2023v1.nc	 153.6 Mbytes	2023-06-11T15:10:58Z
+      puget_sound_mhw_19_n47x50_w122x75_2023v1.nc	 157.1 Mbytes	2023-04-25T14:08:24Z
+      puget_sound_mhw_19_n47x50_w123x00_2023v1.nc	 158.5 Mbytes	2023-04-25T14:06:26Z
+      puget_sound_mhw_19_n47x50_w123x25_2023v1.nc	 155.2 Mbytes	2023-04-25T14:03:38Z
+      puget_sound_mhw_19_n47x75_w122x25_2023v1.nc	 156.5 Mbytes	2023-06-11T15:12:46Z
+      puget_sound_mhw_19_n47x75_w122x50_2023v1.nc	 153.4 Mbytes	2023-06-11T15:09:32Z
+      puget_sound_mhw_19_n47x75_w122x75_2023v1.nc	 161.4 Mbytes	2023-06-11T14:59:08Z
+      puget_sound_mhw_19_n47x75_w123x00_2023v1.nc	 153.5 Mbytes	2023-04-11T15:13:14Z
+      puget_sound_mhw_19_n47x75_w123x25_2023v1.nc	 149.0 Mbytes	2023-04-11T14:00:08Z
+      puget_sound_mhw_19_n48x00_w122x25_2023v1.nc	 160.9 Mbytes	2023-06-11T14:56:00Z
+      puget_sound_mhw_19_n48x00_w122x50_2023v1.nc	 148.7 Mbytes	2023-06-11T14:53:54Z
+      puget_sound_mhw_19_n48x00_w122x75_2023v1.nc	 157.1 Mbytes	2023-04-25T13:45:22Z
+      puget_sound_mhw_19_n48x00_w123x00_2023v1.nc	 153.5 Mbytes	2023-04-25T13:43:28Z
+      puget_sound_mhw_19_n48x25_w122x25_2024v1.nc	 153.2 Mbytes	2024-04-12T14:41:55Z
+      puget_sound_mhw_19_n48x25_w122x50_2024v1.nc	 155.0 Mbytes	2024-04-12T16:55:05Z
+      puget_sound_mhw_19_n48x25_w122x75_2024v1.nc	 152.4 Mbytes	2024-04-12T14:42:23Z
+      puget_sound_mhw_19_n48x25_w123x00_2024v1.nc	 148.9 Mbytes	2024-04-12T14:42:38Z
+      puget_sound_mhw_19_n48x50_w122x50_2024v1.nc	 166.4 Mbytes	2024-03-21T15:30:05Z
+      puget_sound_mhw_19_n48x50_w122x75_2024v1.nc	 156.3 Mbytes	2024-04-12T14:42:50Z
+      puget_sound_mhw_19_n48x50_w123x00_2024v1.nc	 146.2 Mbytes	2024-04-12T14:43:03Z
+      puget_sound_mhw_19_n48x50_w123x25_2024v1.nc	 142.9 Mbytes	2024-03-21T15:29:30Z
+      puget_sound_mhw_19_n48x75_w123x25_2024v1.nc	 152.8 Mbytes	2024-03-21T15:29:17Z
+      puget_sound_mhw_19_n49x00_w123x25_2024v1.nc	 139.6 Mbytes	2024-03-21T14:45:11Z
+      sowa_mhw_19_n46x75_w123x75_2025v1.nc	 163.4 Mbytes	2025-12-11T14:23:35.219Z
+      sowa_mhw_19_n46x75_w124x00_2025v1.nc	 167.1 Mbytes	2025-12-11T14:23:36.203Z
+      sowa_mhw_19_n46x75_w124x25_2025v1.nc	 142.6 Mbytes	2025-12-11T14:23:37.065Z
+      sowa_mhw_19_n47x00_w123x50_2025v1.nc	 159.5 Mbytes	2025-12-11T14:23:37.868Z
+      sowa_mhw_19_n47x00_w123x75_2025v1.nc	 166.4 Mbytes	2025-12-11T14:23:38.841Z
+      sowa_mhw_19_n47x00_w124x00_2025v1.nc	 170.1 Mbytes	2025-12-11T14:23:39.687Z
+      sowa_mhw_19_n47x00_w124x25_2025v1.nc	 152.3 Mbytes	2025-12-11T14:23:40.588Z
+      sowa_mhw_19_n47x25_w123x75_2025v1.nc	 158.9 Mbytes	2025-12-11T14:23:41.400Z
+      sowa_mhw_19_n47x25_w124x00_2025v1.nc	 163.1 Mbytes	2025-12-11T14:23:42.327Z
+      sowa_mhw_19_n47x25_w124x25_2025v1.nc	 156.7 Mbytes	2025-12-11T14:23:43.222Z
       tillamook19_n46x24_w123x99_2021v3.nc	 171.8 Mbytes	2023-08-17T14:09:44.214Z
       tillamook19_n46x24_w124x24_2021v3.nc	 131.2 Mbytes	2023-08-17T14:10:07.987Z
 
