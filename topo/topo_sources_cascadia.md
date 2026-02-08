@@ -1,11 +1,19 @@
 
 # Topo files for Cascadia
 
-Topography DEMs can be found in various places within the [NCEI website](https://www.ncei.noaa.gov/),
-see [Improving Coastal Resiliency with Digital Elevation Models](http://ncei.noaa.gov/news/improving-coastal-resiliency-digital-elevation-models) for an overview.
+Topography DEMs can be found in various places within the
+[NCEI website](https://www.ncei.noaa.gov/),
+see [Improving Coastal Resiliency with Digital Elevation
+Models](http://ncei.noaa.gov/news/improving-coastal-resiliency-digital-elevation-models)
+for an overview.
 
-The "Data URLs" listed below can be used to download a DEM directly from a THREDDS server, e.g. using
-the GeoClaw Python tool
+The "Data URLs" listed below can be used to download a DEM directly. Note
+that `.nc` and `.tif` files must be handled differently.
+
+### Downloading netCDF files
+
+For Data URLs that end in '.nc', the data can be downloaded
+from a THREDDS server, e.g. using the GeoClaw Python tool
 
       topo = clawpack.geoclaw.topotools.read_netcdf(data_url)
 
@@ -15,6 +23,13 @@ See the [topotools documentation](https://www.clawpack.org/topo.html#netcdf-form
 [read_netcdf documentation](https://www.clawpack.org/topotools_module.html#clawpack.geoclaw.topotools.read_netcdf)
 for other arguments to this function, to download a subset, subsample the resolution, etc.
 and information on the object returned by this function.
+
+### Downloading GeoTiff files
+
+For Data URLs that end in '.tif', the data can be downloaded by going to the
+catalog website and clicking on the file, or in Python using e.g.
+
+    Code to appear
 
 ## Global ocean topography
 
@@ -266,84 +281,159 @@ Contains the following in Cascadia:
 
 Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/
 
-Data URL: Not on thredds server, click on .tif file to download
-
 Contains the following in Cascadia:
 
-      OR/index.html (2.54 KB)
-      OR/ncei19_n43x75_w124x00_2021v1.tif (152.15 MB)
-      OR/ncei19_n43x75_w124x25_2021v1.tif (155.91 MB)
-      OR/ncei19_n43x75_w124x50_2021v1.tif (86.61 MB)
-      OR/ncei19_n44x00_w124x00_2021v1.tif (154.17 MB)
-      OR/ncei19_n44x00_w124x25_2021v1.tif (141.86 MB)
-      OR/ncei19_n44x00_w124x50_2021v1.tif (83.32 MB)
-      OR/ncei19_n44x25_w124x00_2021v1.tif (155.49 MB)
-      OR/ncei19_n44x25_w124x25_2021v1.tif (129.38 MB)
-      OR/ncei19_n44x50_w124x00_2021v1.tif (151.46 MB)
-      OR/ncei19_n44x50_w124x25_2021v1.tif (122.08 MB)
-      OR/ncei19_n44x75_w124x00_2021v1.tif (152.83 MB)
-      OR/ncei19_n44x75_w124x25_2021v1.tif (122.33 MB)
-      OR/ncei19_n45x00_w124x00_2021v1.tif (149.65 MB)
-      OR/ncei19_n45x00_w124x25_2021v1.tif (111.79 MB)
+Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/index.html
+Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/ + filename.tif
 
-      wash_bellingham/index.html (2.36 KB)
-      wash_bellingham/ncei19_n48x50_w122x50_2024v1.tif (209.14 MB)
-      wash_bellingham/ncei19_n48x50_w122x75_2024v1.tif (199.92 MB)
-      wash_bellingham/ncei19_n48x50_w123x00_2024v1.tif (182.50 MB)
-      wash_bellingham/ncei19_n48x50_w123x25_2024v1.tif (177.68 MB)
-      wash_bellingham/ncei19_n48x75_w122x50_2017v1.tif (200.51 MB)
-      wash_bellingham/ncei19_n48x75_w122x75_2017v1.tif (197.42 MB)
-      wash_bellingham/ncei19_n48x75_w123x00_2017v1.tif (197.91 MB)
-      wash_bellingham/ncei19_n48x75_w123x25_2024v1.tif (190.54 MB)
-      wash_bellingham/ncei19_n49x00_w122x50_2017v1.tif (195.16 MB)
-      wash_bellingham/ncei19_n49x00_w122x75_2017v1.tif (203.96 MB)
-      wash_bellingham/ncei19_n49x00_w123x00_2017v1.tif (182.19 MB)
-      wash_bellingham/ncei19_n49x00_w123x25_2024v1.tif (171.20 MB)
-      wash_juandefuca/index.html (2.08 KB)
-      wash_juandefuca/ncei19_n48x25_w123x00_2024v2.tif (183.93 MB)
-      wash_juandefuca/ncei19_n48x25_w123x25_2021v1.tif (130.02 MB)
-      wash_juandefuca/ncei19_n48x25_w123x50_2021v1.tif (121.50 MB)
-      wash_juandefuca/ncei19_n48x25_w123x75_2021v1.tif (120.92 MB)
-      wash_juandefuca/ncei19_n48x25_w124x00_2021v1.tif (120.47 MB)
-      wash_juandefuca/ncei19_n48x25_w124x25_2021v1.tif (140.25 MB)
-      wash_juandefuca/ncei19_n48x25_w124x50_2021v1.tif (147.06 MB)
-      wash_juandefuca/ncei19_n48x50_w124x25_2021v1.tif (100.65 MB)
-      wash_juandefuca/ncei19_n48x50_w124x50_2021v1.tif (109.44 MB)
-      wash_outercoast/index.html (2.54 KB)
-      wash_outercoast/ncei19_n47x00_w0124x00_2018v1.tif (207.21 MB)
-      wash_outercoast/ncei19_n47x00_w0124x25_2018v1.tif (187.27 MB)
-      wash_outercoast/ncei19_n47x25_w0124x25_2018v1.tif (195.08 MB)
-      wash_outercoast/ncei19_n47x50_w0124x25_2018v1.tif (200.55 MB)
-      wash_outercoast/ncei19_n47x50_w0124x50_2018v1.tif (158.97 MB)
-      wash_outercoast/ncei19_n47x75_w0124x50_2018v1.tif (176.32 MB)
-      wash_outercoast/ncei19_n48x00_w0124x50_2018v1.tif (189.39 MB)
-      wash_outercoast/ncei19_n48x00_w0124x75_2018v1.tif (163.14 MB)
-      wash_outercoast/ncei19_n48x25_w0124x75_2018v1.tif (196.46 MB)
-      wash_outercoast/ncei19_n48x50_w0124x75_2018v1.tif (165.07 MB)
-      wash_outercoast/wa_outercoast_topobathy_19.dbf (1.97 KB)
-      wash_outercoast/wa_outercoast_topobathy_19.prj (287 B)
-      wash_outercoast/wa_outercoast_topobathy_19.shp (1.43 KB)
-      wash_outercoast/wa_outercoast_topobathy_19.shx (180 B)
-      wash_pugetsound/index.html (3.30 KB)
-      wash_pugetsound/ncei19_n47x25_w122x25_2024v1.tif (180.09 MB)
-      wash_pugetsound/ncei19_n47x25_w122x50_2024v1.tif (183.20 MB)
-      wash_pugetsound/ncei19_n47x25_w122x75_2024v1.tif (193.70 MB)
-      wash_pugetsound/ncei19_n47x25_w123x00_2024v1.tif (201.39 MB)
-      wash_pugetsound/ncei19_n47x25_w123x25_2024v1.tif (194.52 MB)
-      wash_pugetsound/ncei19_n47x50_w122x25_2023v1.tif (190.66 MB)
-      wash_pugetsound/ncei19_n47x50_w122x50_2023v1.tif (191.52 MB)
-      wash_pugetsound/ncei19_n47x50_w122x75_2023v1.tif (198.15 MB)
-      wash_pugetsound/ncei19_n47x50_w123x00_2023v1.tif (199.95 MB)
-      wash_pugetsound/ncei19_n47x50_w123x25_2023v1.tif (194.95 MB)
-      wash_pugetsound/ncei19_n47x75_w122x25_2023v1.tif (194.27 MB)
-      wash_pugetsound/ncei19_n47x75_w122x50_2023v1.tif (189.51 MB)
-      wash_pugetsound/ncei19_n47x75_w122x75_2023v1.tif (204.33 MB)
-      wash_pugetsound/ncei19_n47x75_w123x00_2023v1.tif (191.95 MB)
-      wash_pugetsound/ncei19_n47x75_w123x25_2023v1.tif (185.66 MB)
-      wash_pugetsound/ncei19_n48x00_w122x25_2023v1.tif (202.19 MB)
-      wash_pugetsound/ncei19_n48x00_w122x50_2023v1.tif (184.33 MB)
-      wash_pugetsound/ncei19_n48x00_w122x75_2023v1.tif (196.52 MB)
-      wash_pugetsound/ncei19_n48x00_w123x00_2023v1.tif (194.17 MB)
-      wash_pugetsound/ncei19_n48x25_w122x25_2024v1.tif (195.59 MB)
-      wash_pugetsound/ncei19_n48x25_w122x50_2024v1.tif (195.53 MB)
-      wash_pugetsound/ncei19_n48x25_w122x75_2024v1.tif (190.85 MB)
+      ncei19_n43x75_w124x00_2021v1.tif (152.15 MB)
+      ncei19_n43x75_w124x25_2021v1.tif (155.91 MB)
+      ncei19_n43x75_w124x50_2021v1.tif (86.61 MB)
+      ncei19_n44x00_w124x00_2021v1.tif (154.17 MB)
+      ncei19_n44x00_w124x25_2021v1.tif (141.86 MB)
+      ncei19_n44x00_w124x50_2021v1.tif (83.32 MB)
+
+      ncei19_n44x25_w124x00_2021v1.tif (155.49 MB) GONE
+      ncei19_n44x25_w124x25_2021v1.tif (129.38 MB) GONE
+      ncei19_n44x50_w124x00_2021v1.tif (151.46 MB) GONE
+      ncei19_n44x50_w124x25_2021v1.tif (122.08 MB) GONE
+      ncei19_n44x75_w124x00_2021v1.tif (152.83 MB) GONE
+      ncei19_n44x75_w124x25_2021v1.tif (122.33 MB) GONE
+      ncei19_n45x00_w124x00_2021v1.tif (149.65 MB) GONE
+      ncei19_n45x00_w124x25_2021v1.tif (111.79 MB) GONE
+
+      ncei19_n44x25_w124x00_2025v2.tif (212.90 MB)
+      ncei19_n44x25_w124x25_2025v2.tif (205.21 MB)
+      ncei19_n44x25_w124x50_2025v1.tif (175.49 MB)
+      ncei19_n44x50_w124x00_2025v2.tif (212.95 MB)
+      ncei19_n44x50_w124x25_2025v2.tif (200.10 MB)
+      ncei19_n44x50_w124x50_2025v1.tif (175.55 MB)
+      ncei19_n44x75_w124x00_2025v2.tif (215.21 MB)
+      ncei19_n44x75_w124x25_2025v2.tif (198.42 MB)
+      ncei19_n44x75_w124x50_2025v1.tif (182.68 MB)
+      ncei19_n45x00_w124x00_2025v2.tif (211.24 MB)
+      ncei19_n45x00_w124x25_2025v2.tif (195.45 MB)
+      ncei19_n45x00_w124x50_2025v1.tif (176.93 MB)
+      ncei19_n45x25_w124x00_2025v1.tif (211.11 MB)
+      ncei19_n45x25_w124x25_2025v1.tif (189.41 MB)
+      ncei19_n45x50_w124x00_2025v1.tif (211.68 MB)
+      ncei19_n45x50_w124x25_2025v1.tif (187.24 MB)
+      ncei19_n45x75_w124x00_2025v1.tif (211.99 MB)
+      ncei19_n45x75_w124x25_2025v1.tif (184.36 MB)
+      ncei19_n46x00_w124x00_2025v1.tif (210.86 MB)
+      ncei19_n46x00_w124x25_2025v1.tif (183.79 MB)
+
+Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_bellingham/index.html
+Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_bellingham/ + filename.tif
+
+      ncei19_n48x50_w122x50_2024v1.tif (209.14 MB)
+      ncei19_n48x50_w122x75_2024v1.tif (199.92 MB)
+      ncei19_n48x50_w123x00_2024v1.tif (182.50 MB)
+      ncei19_n48x50_w123x25_2024v1.tif (177.68 MB)
+      ncei19_n48x75_w122x50_2017v1.tif (200.51 MB)
+      ncei19_n48x75_w122x75_2017v1.tif (197.42 MB)
+      ncei19_n48x75_w123x00_2017v1.tif (197.91 MB)
+      ncei19_n48x75_w123x25_2024v1.tif (190.54 MB)
+      ncei19_n49x00_w122x50_2017v1.tif (195.16 MB)
+      ncei19_n49x00_w122x75_2017v1.tif (203.96 MB)
+      ncei19_n49x00_w123x00_2017v1.tif (182.19 MB)
+      ncei19_n49x00_w123x25_2024v1.tif (171.20 MB)
+
+Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_juandefuca/index.html
+Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_juandefuca/ + filename.tif
+
+
+      ncei19_n48x25_w123x00_2024v2.tif (183.93 MB)
+      ncei19_n48x25_w123x25_2021v1.tif (130.02 MB)
+      ncei19_n48x25_w123x50_2021v1.tif (121.50 MB)
+      ncei19_n48x25_w123x75_2021v1.tif (120.92 MB)
+      ncei19_n48x25_w124x00_2021v1.tif (120.47 MB)
+      ncei19_n48x25_w124x25_2021v1.tif (140.25 MB)
+      ncei19_n48x25_w124x50_2021v1.tif (147.06 MB)
+      ncei19_n48x50_w124x25_2021v1.tif (100.65 MB)
+      ncei19_n48x50_w124x50_2021v1.tif (109.44 MB)
+
+
+
+Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_outercoast/index.html
+Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_outercoast/ + filename.tif
+
+      ncei19_n47x00_w0124x00_2018v1.tif (207.21 MB) GONE
+      ncei19_n47x00_w0124x25_2018v1.tif (187.27 MB) GONE
+      ncei19_n47x25_w0124x25_2018v1.tif (195.08 MB) GONE
+      ncei19_n47x50_w0124x25_2018v1.tif (200.55 MB) GONE
+      ncei19_n47x50_w0124x50_2018v1.tif (158.97 MB) GONE
+      ncei19_n47x75_w0124x50_2018v1.tif (176.32 MB) GONE
+      ncei19_n48x00_w0124x50_2018v1.tif (189.39 MB) GONE
+      ncei19_n48x00_w0124x75_2018v1.tif (163.14 MB) GONE
+      ncei19_n48x25_w0124x75_2018v1.tif (196.46 MB) GONE
+      ncei19_n48x50_w0124x75_2018v1.tif (165.07 MB) GONE
+
+      ncei19_n46x75_w123x75_2025v1.tif (212.87 MB)
+      ncei19_n46x75_w124x00_2025v1.tif (206.91 MB)
+      ncei19_n46x75_w124x25_2025v1.tif (201.29 MB)
+      ncei19_n47x00_w123x50_2025v1.tif (210.47 MB)
+      ncei19_n47x00_w123x75_2025v1.tif (213.07 MB)
+      ncei19_n47x00_w124x00_2025v2.tif (208.75 MB)
+      ncei19_n47x00_w124x25_2025v2.tif (200.00 MB)
+      ncei19_n47x25_w123x75_2025v1.tif (209.79 MB)
+      ncei19_n47x25_w124x00_2025v1.tif (210.62 MB)
+      ncei19_n47x25_w124x25_2025v2.tif (200.38 MB)
+      ncei19_n47x25_w124x50_2025v1.tif (185.38 MB)
+      ncei19_n47x50_w124x25_2025v2.tif (200.59 MB)
+      ncei19_n47x50_w124x50_2025v2.tif (196.98 MB)
+      ncei19_n47x75_w124x50_2025v2.tif (202.83 MB)
+      ncei19_n47x75_w124x75_2025v1.tif (183.08 MB)
+      ncei19_n48x00_w124x50_2025v2.tif (205.70 MB)
+      ncei19_n48x00_w124x75_2025v2.tif (196.85 MB)
+      ncei19_n48x25_w124x75_2025v2.tif (208.39 MB)
+      ncei19_n48x25_w125x00_2025v1.tif (188.22 MB)
+      ncei19_n48x50_w124x75_2025v2.tif (196.50 MB)
+      ncei19_n48x50_w125x00_2025v1.tif (188.06 MB)
+
+Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_pugetsound/index.html
+Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_pugetsound/ + filename.tif
+
+      ncei19_n47x25_w122x25_2024v1.tif (180.09 MB)
+      ncei19_n47x25_w122x50_2024v1.tif (183.20 MB)
+      ncei19_n47x25_w122x75_2024v1.tif (193.70 MB)
+      ncei19_n47x25_w123x00_2024v1.tif (201.39 MB)
+      ncei19_n47x25_w123x25_2024v1.tif (194.52 MB)
+      ncei19_n47x50_w122x25_2023v1.tif (190.66 MB)
+      ncei19_n47x50_w122x50_2023v1.tif (191.52 MB)
+      ncei19_n47x50_w122x75_2023v1.tif (198.15 MB)
+      ncei19_n47x50_w123x00_2023v1.tif (199.95 MB)
+      ncei19_n47x50_w123x25_2023v1.tif (194.95 MB)
+      ncei19_n47x75_w122x25_2023v1.tif (194.27 MB)
+      ncei19_n47x75_w122x50_2023v1.tif (189.51 MB)
+      ncei19_n47x75_w122x75_2023v1.tif (204.33 MB)
+      ncei19_n47x75_w123x00_2023v1.tif (191.95 MB)
+      ncei19_n47x75_w123x25_2023v1.tif (185.66 MB)
+      ncei19_n48x00_w122x25_2023v1.tif (202.19 MB)
+      ncei19_n48x00_w122x50_2023v1.tif (184.33 MB)
+      ncei19_n48x00_w122x75_2023v1.tif (196.52 MB)
+      ncei19_n48x00_w123x00_2023v1.tif (194.17 MB)
+      ncei19_n48x25_w122x25_2024v1.tif (195.59 MB)
+      ncei19_n48x25_w122x50_2024v1.tif (195.53 MB)
+      ncei19_n48x25_w122x75_2024v1.tif (190.85 MB)
+
+Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/columbia_river/index.html
+Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/columbia_river/ + filename.tif
+
+    ncei19_n45x75_w122x00_2024v1.tif (204.91 MB)
+    ncei19_n45x75_w122x25_2024v1.tif (203.95 MB)
+    ncei19_n45x75_w122x50_2024v1.tif (200.02 MB)
+    ncei19_n45x75_w122x75_2024v1.tif (196.95 MB)
+    ncei19_n45x75_w123x00_2024v1.tif (204.90 MB)
+    ncei19_n46x00_w122x75_2024v1.tif (201.63 MB)
+    ncei19_n46x00_w123x00_2024v1.tif (209.58 MB)
+    ncei19_n46x25_w123x00_2024v1.tif (210.19 MB)
+    ncei19_n46x25_w123x25_2024v1.tif (209.52 MB)
+    ncei19_n46x25_w123x50_2024v1.tif (207.76 MB)
+    ncei19_n46x25_w123x75_2024v1.tif (210.24 MB)
+    ncei19_n46x25_w124x00_2024v1.tif (213.62 MB)
+    ncei19_n46x25_w124x25_2024v1.tif (188.71 MB)
+    ncei19_n46x50_w123x50_2024v1.tif (207.65 MB)
+    ncei19_n46x50_w123x75_2024v1.tif (212.70 MB)
+    ncei19_n46x50_w124x00_2024v1.tif (213.46 MB)
+    ncei19_n46x50_w124x25_2024v1.tif (200.29 MB)
