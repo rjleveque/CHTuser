@@ -18,8 +18,8 @@ for s in source_info_lines:
         url = s.replace('Data URL: ','')
         url = url.replace('/ + filename.nc','').strip()
         url = url.replace('/ + filename.tif','').strip()
-        print(' +++   URL = ',url)
-    if 'GONE' in s:
+        #print(' +++   URL = ',url)
+    if 'REMOVED' in s:
         continue  # skip data sets that have been removed
     result = regexp.search(s.replace('\t',' '))
     if result:

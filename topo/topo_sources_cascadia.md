@@ -284,6 +284,7 @@ Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_20
 Contains the following in Cascadia:
 
 Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/index.html
+
 Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/ + filename.tif
 
       ncei19_n43x75_w124x00_2021v1.tif (152.15 MB)
@@ -293,14 +294,14 @@ Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2
       ncei19_n44x00_w124x25_2021v1.tif (141.86 MB)
       ncei19_n44x00_w124x50_2021v1.tif (83.32 MB)
 
-      ncei19_n44x25_w124x00_2021v1.tif (155.49 MB) GONE
-      ncei19_n44x25_w124x25_2021v1.tif (129.38 MB) GONE
-      ncei19_n44x50_w124x00_2021v1.tif (151.46 MB) GONE
-      ncei19_n44x50_w124x25_2021v1.tif (122.08 MB) GONE
-      ncei19_n44x75_w124x00_2021v1.tif (152.83 MB) GONE
-      ncei19_n44x75_w124x25_2021v1.tif (122.33 MB) GONE
-      ncei19_n45x00_w124x00_2021v1.tif (149.65 MB) GONE
-      ncei19_n45x00_w124x25_2021v1.tif (111.79 MB) GONE
+      ncei19_n44x25_w124x00_2021v1.tif (155.49 MB) REMOVED
+      ncei19_n44x25_w124x25_2021v1.tif (129.38 MB) REMOVED
+      ncei19_n44x50_w124x00_2021v1.tif (151.46 MB) REMOVED
+      ncei19_n44x50_w124x25_2021v1.tif (122.08 MB) REMOVED
+      ncei19_n44x75_w124x00_2021v1.tif (152.83 MB) REMOVED
+      ncei19_n44x75_w124x25_2021v1.tif (122.33 MB) REMOVED
+      ncei19_n45x00_w124x00_2021v1.tif (149.65 MB) REMOVED
+      ncei19_n45x00_w124x25_2021v1.tif (111.79 MB) REMOVED
 
       ncei19_n44x25_w124x00_2025v2.tif (212.90 MB)
       ncei19_n44x25_w124x25_2025v2.tif (205.21 MB)
@@ -324,6 +325,7 @@ Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2
       ncei19_n46x00_w124x25_2025v1.tif (183.79 MB)
 
 Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_bellingham/index.html
+
 Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_bellingham/ + filename.tif
 
       ncei19_n48x50_w122x50_2024v1.tif (209.14 MB)
@@ -340,6 +342,7 @@ Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2
       ncei19_n49x00_w123x25_2024v1.tif (171.20 MB)
 
 Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_juandefuca/index.html
+
 Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_juandefuca/ + filename.tif
 
 
@@ -356,18 +359,19 @@ Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2
 
 
 Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_outercoast/index.html
+
 Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_outercoast/ + filename.tif
 
-      ncei19_n47x00_w0124x00_2018v1.tif (207.21 MB) GONE
-      ncei19_n47x00_w0124x25_2018v1.tif (187.27 MB) GONE
-      ncei19_n47x25_w0124x25_2018v1.tif (195.08 MB) GONE
-      ncei19_n47x50_w0124x25_2018v1.tif (200.55 MB) GONE
-      ncei19_n47x50_w0124x50_2018v1.tif (158.97 MB) GONE
-      ncei19_n47x75_w0124x50_2018v1.tif (176.32 MB) GONE
-      ncei19_n48x00_w0124x50_2018v1.tif (189.39 MB) GONE
-      ncei19_n48x00_w0124x75_2018v1.tif (163.14 MB) GONE
-      ncei19_n48x25_w0124x75_2018v1.tif (196.46 MB) GONE
-      ncei19_n48x50_w0124x75_2018v1.tif (165.07 MB) GONE
+      ncei19_n47x00_w0124x00_2018v1.tif (207.21 MB) REMOVED
+      ncei19_n47x00_w0124x25_2018v1.tif (187.27 MB) REMOVED
+      ncei19_n47x25_w0124x25_2018v1.tif (195.08 MB) REMOVED
+      ncei19_n47x50_w0124x25_2018v1.tif (200.55 MB) REMOVED
+      ncei19_n47x50_w0124x50_2018v1.tif (158.97 MB) REMOVED
+      ncei19_n47x75_w0124x50_2018v1.tif (176.32 MB) REMOVED
+      ncei19_n48x00_w0124x50_2018v1.tif (189.39 MB) REMOVED
+      ncei19_n48x00_w0124x75_2018v1.tif (163.14 MB) REMOVED
+      ncei19_n48x25_w0124x75_2018v1.tif (196.46 MB) REMOVED
+      ncei19_n48x50_w0124x75_2018v1.tif (165.07 MB) REMOVED
 
       ncei19_n46x75_w123x75_2025v1.tif (212.87 MB)
       ncei19_n46x75_w124x00_2025v1.tif (206.91 MB)
@@ -392,6 +396,7 @@ Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2
       ncei19_n48x50_w125x00_2025v1.tif (188.06 MB)
 
 Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_pugetsound/index.html
+
 Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/wash_pugetsound/ + filename.tif
 
       ncei19_n47x25_w122x25_2024v1.tif (180.09 MB)
@@ -418,6 +423,7 @@ Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2
       ncei19_n48x25_w122x75_2024v1.tif (190.85 MB)
 
 Catalog: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/columbia_river/index.html
+
 Data URL: https://coast.noaa.gov/htdata/raster2/elevation/NCEI_ninth_Topobathy_2014_8483/columbia_river/ + filename.tif
 
     ncei19_n45x75_w122x00_2024v1.tif (204.91 MB)
