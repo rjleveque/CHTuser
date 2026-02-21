@@ -2,7 +2,7 @@ version: 1
 project:
   title: CHTuser
   authors:
-    - name: R.J. LeVeque
+    - name: R.J. LeVeque and others for the Cascadia CoPes Hub
   copyright: '2025'
   github: rjleveque/CHTuser
   bibliography:
@@ -32,6 +32,7 @@ project:
       children:
         - file: topo/README.md
         - file: topo/topo_sources_cascadia.md
+        - file: topo/SoWA-Tiles.ipynb
     - title: GaugeOutput
       children:
         - file: docs/intro_gauges.md
