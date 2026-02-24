@@ -1,10 +1,12 @@
 
+import os,sys
 import re
 regexp = re.compile(r"(?P<fname>[^ ]*).nc ")
 regexp_tif = re.compile(r"(?P<fname>[^ ]*).tif ")
 
 # Load list of topo file sources found so far:
-topo_sources_file = 'topo_sources_cascadia.md'
+CHTuser = os.environ['CHTuser']
+topo_sources_file = f'{CHTuser}/topo/topo_sources_cascadia.md'
 source_info_lines = open(topo_sources_file).readlines()
 
 print(f'List of catalogs found in {topo_sources_file}:')
