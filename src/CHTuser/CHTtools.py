@@ -99,21 +99,38 @@ def longname(event, delimiter='-'):
 
     return lname
 
-def name_conversions(markdown_table=False):
+def name_conversions(markdown_table=False, add_weights=False):
 
     events = all_events()  # all 36 short names
 
+    if add_weights:
+        weights = logic_tree_weights()
+
+    table_str = ''
     if markdown_table:
         sep = '|'
-        print(f'{sep}event number {sep} event {sep} long name {sep}')
-        print(f'{sep} ---: {sep} :---: {sep} :--- {sep}')
+        if add_weights:
+            table_str += f'{sep}event number {sep} event {sep} long name {sep} weight {sep}\n'
+            table_str += f'{sep} ---: {sep} :---: {sep} :--- {sep} :--- {sep}\n'
+        else:
+            table_str += f'{sep}event number {sep} event {sep} long name {sep}\n'
+            table_str += f'{sep} ---: {sep} :---: {sep} :--- {sep}\n'
+            
     else:
         sep = ''
-        print('List of events by event number, alphabetized by short name')
+        table_str += 'List of events by event number, alphabetized by short name\n'
     for k,event in enumerate(events):
         lname = longname(event)
         event_num = k+1
-        print(f'{sep}{event_num:4d}  {sep}  {event}  {sep}  {lname} {sep}')
+        if add_weights:
+            table_str += f'{sep}{event_num:4d}  {sep}  {event}  {sep} {lname} {sep} {weights[event]:.5f} {sep} \n'
+        else:
+            table_str += f'{sep}{event_num:4d}  {sep}  {event}  {sep}  {lname} {sep}\n'
+
+    if markdown_table:
+        return table_str
+    else:
+        print(table_str)
 
 
 def name_conversions_long_to_short():

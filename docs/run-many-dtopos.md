@@ -1,7 +1,7 @@
 (run-many-dtopos)=
 # Running the same GeoClaw setup with many dtopo files
 
-The simple test problem found in 
+The simple test problem found in
 [`$CHT/geoclaw_runs/tacc-test`](https://github.com/rjleveque/CopesHubTsunamis/tree/main/geoclaw_runs/tacc-test)
 shows an example of how the same GeoClaw setup can be applied for two
 different tsunami sources (dtopo files) in parallel.
@@ -67,7 +67,7 @@ record time series at a single gauge (over a very short run for illustration).
 
 ### Testing setrun with no dtopo
 
-The `setrun_case.py` file contains a main program that calls `setrun` with 
+The `setrun_case.py` file contains a main program that calls `setrun` with
 `case={}` and creates the `*.data` files needed for GeoClaw
 so that these can be checked, if desired, before running multiple jobs with
 different dtopo files.  You can do this from the command line via:
@@ -86,7 +86,7 @@ kml files to view them, but this may be particularly valuable if you are
 setting up runs on your laptop before transferring the to TACC for
 execution.
 Note that an error will result if the topofile(s) cannot be found when
-making the kml files. 
+making the kml files.
 
 
 ## A setplot function for multiple cases
@@ -94,13 +94,13 @@ making the kml files.
 The file `setplot_case.py` describes any plotting or other post-processing
 to be done after the GeoClaw run completes.
 
-This file is only needed if `make_plots == True` in 
+This file is only needed if `make_plots == True` in
 `runclaw_makeplots_dtopos.py` (see below).
 
 This file can then be similar to a standard `setplot.py` that specifies how
 the plots should be made for each time frame of output data, as described
 for example in  
-[Setting up the time frame 
+[Setting up the time frame
 plots](https://rjleveque.github.io/geoclaw_tsunami_tutorial/GTT/CopalisBeach/exercise1/setplot_description.html)
 from the [GeoClaw Tsunami
 Tutorial](https://rjleveque.github.io/geoclaw_tsunami_tutorial).
@@ -132,7 +132,7 @@ A simple example with some documentation can be found in
 [`$CLAW/clawutil/examples/clawmultip_advection_1d_example1`](https://github.com/clawpack/clawutil/tree/master/examples/clawmultip_advection_1d_example1).
 :::
 
-On your laptop, 
+On your laptop,
 this script can be run from the command line with a the syntax:
 
     python runclaw_makeplots_dtopos.py <nprocs> <first_event> <last_event>
@@ -227,12 +227,12 @@ can be adapted to run multiple jobs in parallel on TACC.
 
 :::{note}
 Before running the script, note that:
-- You will have to change the 
+- You will have to change the
   `Allocation name` from `DS-portal-rjl` to your own allocation on TACC.
 - The script is set to submit to the queue `skx-dev`, which is restricted to
   quick jobs. For production runs you will probably want to use `skx`.
 - The time limit for this job is set to `00:10:00` (10 minutes) and the
-  test code runs even quicker than that (since `tfinal = 120` in 
+  test code runs even quicker than that (since `tfinal = 120` in
   `setrun_case.py`, so it runs for only 2 minutes of simulated time.
   For production runs you will need to set this much larger.
 - For production runs, make sure the code is producing checkpoint files so
@@ -286,7 +286,7 @@ also depend on how many jobs are run sequentially, e.g. the first approach
 above wil require roughly 3 times as much wall time as the second approach.
 The latter approach would also get the work done sooner: provided all three jobs
 submitted start running quickly, all 18 of the geoclaw simulations will be
-running in parallel. 
+running in parallel.
 
 Job management could possibly be streamlined using
 [PyLauncher](https://docs.tacc.utexas.edu/software/pylauncher/) on
@@ -329,15 +329,19 @@ contains some sets of dtopofiles:
   end of the earthquake, with the full displacement specified at time `t = 1`
   second.
 
-- Subdirectory `nosubevents_251229/dtopofiles` contains 18 static
-  displacements with names like `BL13D_instant.dtt3` that were computed
-  using the Okada model from modified slips that do not contain the
-  subevents. *(Describe in more detail.)*
+- Subdirectory `dtopo30sec_nosubevents_kinokada/dtopofiles` contains 36
+  time-dependent "Kinetic Okada" (KinOkada) deformations, as described in
+  [](seismic-and-tsunami-sources), with names like `BL13D.dtt3` etc.
+  This directory also contains files with the corresponding static Okada
+  displacements, with names like `BL13D_instant.dtt3`.
+
+We recommend using the time-dependent KinOkada deformations for tsunami
+modeling, for reasons described in [](seismic-and-tsunami-sources).
 
 ### topofiles
 
 The directory `/work2/04137/rjl/CHTshare/CopesHubTsunamis/topo/topofiles`
-contains some topfiles. *(Add more details.)*
+contains some topofiles. *(Add more details.)*
 
 ### GeoClaw executables
 

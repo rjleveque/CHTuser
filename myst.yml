@@ -26,13 +26,14 @@ project:
         - file: docs/run-many-dtopos.md
     - title: Ground motions / dtopo files
       children:
-        - file: docs/ground_motions.md
-        - file: dtopo/GroundMotions.ipynb
+        - file: docs/seismic-and-tsunami-sources.md
+        - file: dtopo/CHTtoolsDemo.ipynb
     - title: Topography DEMs / topo files
       children:
         - file: topo/README.md
         - file: topo/topo_sources_cascadia.md
         - file: topo/SoWA-Tiles.ipynb
+        - file: topo/WAcoast-Tiles.ipynb
     - title: GaugeOutput
       children:
         - file: docs/intro_gauges.md
