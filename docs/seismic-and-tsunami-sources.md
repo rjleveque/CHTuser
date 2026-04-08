@@ -9,8 +9,20 @@ archived at [](https://doi.org/10.17603/ds2-dqrm-dh11).
 The surface deformation from these ground motions can be used as sources
 for tsunami simulations. Several different versions of these have been
 computed, including for the full time-dependent kinematic rupture, but also
-static displacements for "instantaneous" tsunami generation, as described
-below.   To use these ground motions in simulations on TACC, see
+static displacements for "instantaneous" tsunami generation.
+
+Recently a modified set of events has also been generated that we feel
+are better to use for tsunami modeling.  These 36 events are
+closely related to the original events but without the subevents that were
+introduced originally to improve the seismic models at high-frequency,
+since these were found to have a significant impact on the low-frequency
+and permanent deformation near the coast (which is critical to properly model
+in tsunami simulations). For these new events, full 3D seismic simulations
+were not performed. Instead the Okada elastic half-space model was used to
+approximate the surface deformation
+(including a kinematic version, as described below in [](#kinokada).).
+
+To use these ground motions in simulations on TACC, see
 [](run-many-dtopos:share).
 
 ## Logic Tree
@@ -41,7 +53,7 @@ graph LR
     BL --> |0.33| BL16{Skl16}
     BL10 --> |0.2| BL10D{Deep - BL10D}
     BL10 --> |0.5| BL10M{Middle - BL10M}
-    BL10 --> |0.2| BL10S{Shallow - BL10S}
+    BL10 --> |0.3| BL10S{Shallow - BL10S}
 
     F --> |0.5| FL{Locking}
     F --> |0.5| FR{Random}
@@ -50,7 +62,7 @@ graph LR
     FR --> |0.33| FR16{Skl16}
     FR16 --> |0.2| FR16D{Deep - FR16D}
     FR16 --> |0.5| FR16M{Middle - FR16M}
-    FR16 --> |0.2| FR16S{Shallow - FR16S}
+    FR16 --> |0.3| FR16S{Shallow - FR16S}
 
 ```
 :::
@@ -62,7 +74,7 @@ the weights from the logic tree branches leading to each leaf.
 
 Note that these weights could potentially be used as conditional
 probabilities, i.e. assuming that one of these 36 events happens,
-the weight can be viewed as the probability that is was this event.
+the weight can be viewed as the probability that it was this event.
 To compute annual probabilities of occurrence, as needed for PTHA,
 one could assign a probability such as $p_0 = 1/525$ for the
 occurrence of "some such CSZ event", and then multiply each of the
@@ -153,7 +165,7 @@ The seismic simulation code [SPECFEM3D](https://specfem.org/)
 was used to simulate wave propagation in 3-D using a seismic velocity
 model for Cascadia.  This produces synthetic waveforms (i.e., time
 series) of ground shaking and displacement for each scenario, which
-were captured on a grid point points on the earth surface (both
+were captured at grid points on the earth surface (both
 onshore and on the sea floor).
 
 For the purposes of tsunami modeling, the vertical deformation time series at
@@ -189,7 +201,7 @@ signal is not needed for tsunami modeling (and would not be useful
 for seismic hazard assessment either since it would be missing the
 high-frequency contributions of the subevents).  Instead the sea
 floor motions used as the tsunami model inputs were computed using
-KinOkada approach described below.
+the approach described below in [](#kinokada).
 
 ## Okada model of an elastic halfspace
 
@@ -221,7 +233,8 @@ this is often a decent approximation.  We have computed a set of
 deformations of this nature that we give names like `BL10D_instant`.
 However, we suggest instead using the "KinOkada" versions described next.
 
-## Kinetic Okada (KinOkada) deformations
+(kinokada)=
+## Kinematic Okada (KinOkada) deformations
 
 Since many Cascadia CoPes Hub researchers are interested in modeling
 the combined effect of the earthquake and tsunami, and are interested
@@ -229,7 +242,7 @@ in the time scales over which these hazards evolve for different
 events, we have also created a set of deformations that are based
 on the Okada model but that evolve in time in a manner similar to
 the low-frequency components of the deformation obtained from the
-original seismic model for each event.  This Kinetic Okada version
+original seismic model for each event.  This Kinematic Okada version
 is obtained by using the Okada elastic halfspace model to compute
 the static deformation that results from the specified slip on each
 subfault, but then we accumulate the global deformation on our
