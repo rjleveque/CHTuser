@@ -13,8 +13,9 @@ static displacements for "instantaneous" tsunami generation.
 
 Recently a modified set of events has also been generated that we feel
 are better to use for tsunami modeling.  These 36 events are
-closely related to the original events but without the subevents that were
-introduced originally to improve the seismic models at high-frequency,
+closely related to the original events but without the high-frequency
+subevents that are used to model and match expected shaking
+at high-frequencies (> 1Hz),
 since these were found to have a significant impact on the low-frequency
 and permanent deformation near the coast (which is critical to properly model
 in tsunami simulations). For these new events, full 3D seismic simulations
@@ -28,18 +29,32 @@ To use these ground motions in simulations on TACC, see
 ## Logic Tree
 
 The names of the 36 events are based on a logic tree that follows
-the National Seismic Hazard Model logic tree, which weighted buried
-events 0.75 and frontal thrust 0.25, and then the following weights
-for the downdip limits: Deep: 0.2, Middle: 0.5, Shallow: 0.3. Within
-each of these 6 branches there are 6 events that have equal weights,
+the National Seismic Hazard Model (NSHM) logic tree for Cascadia
+megathrust earthquakes where possible, which includes the following
+weights for the downdip limits: Deep: 0.2, Middle: 0.5, Shallow:
+0.3. The weights for the buried (0.75) and frontal thrust (0.25)
+are based on the logic tree developed by the USGS Powell Center
+Tsunami Sources Working Group (Sypus and Wang 2024). Within each
+of these 6 branches there are 6 events that have equal weights,
 since both the slip distribution and magnitude-area relationship
 branches are equally weighted.
 
+This figure shows the structure of the logic tree and the assumptions
+and weights for each branch  (click to view):
 
-Here's a view of the logic tree in which only the top- and bottom-most
-branches are displayed in full (click to view):
+:::{dropdown} Logic Tree Version 1
+:close:
+```{figure} figures/logic_tree_paper_larger_num.png
+:width: 600px
+:align: center
+```
+:::
 
-:::{dropdown} Logic Tree
+
+Here's a more tree-like view of the logic tree in which only the
+top- and bottom-most branches are displayed in full:
+
+:::{dropdown} Logic Tree Version 2
 :close:
 ```{mermaid}
 graph LR
@@ -74,14 +89,14 @@ the weights from the logic tree branches leading to each leaf.
 
 Note that these weights could potentially be used as conditional
 probabilities, i.e. assuming that one of these 36 events happens,
-the weight can be viewed as the probability that it was this event.
+the weight can be viewed as the probability of this event.
 To compute annual probabilities of occurrence, as needed for PTHA,
-one could assign a probability such as $p_0 = 1/525$ for the
+one could assign a probability such as $p_0 = 1/526$ for the
 occurrence of "some such CSZ event", and then multiply each of the
-weights below by this value $p_0$.  This value 1/525 is suggested
+weights below by this value $p_0$.  This value 1/526 is suggested
 by the [National Seismic Hazard
 Model](https://www.usgs.gov/programs/earthquake-hazards/national-seismic-hazard-model-project)
-that this logic tree is based on [TRUE?].
+that this logic tree is based on (Frankel et al., 2015).
 
 
 :::{warning}
@@ -140,13 +155,14 @@ probabilistic tsunami hazard assessment (PTHA) with these events.
 These 36 events were defined by first specifying a fault geometry
 for the Cascadia Subduction Zone Megathrust surface (and also for
 an additional set of front faults, for the Frontal Thrust events).
-This geometry consists of a large number of triangular subfaults.
+This geometry is from McCrory et al. (2012). This geometry consists
+of a large number of triangular subfaults.
 For each event, several quantities are defined on each of the
 subfaults, including:
 
 - **slip**: The magnitude of the slip (relative displacement along subfault),
 - **rake**: The direction of the slip along the subfault,
-- **rutpure time**: The time the slip of this subfault starts,
+- **rupture time**: The time the slip of this subfault starts,
 - **rise time**: Determines the time history of the slip on this fault.
 
 For each event, the resulting ground motion can then be determined
@@ -155,18 +171,45 @@ the time-dependent slip is specified *a priori*.  (By contrast a
 *dynamic rupture* would attempt to model how the slip evolves using
 fracture mechanics based on presumed stresses within the earth.)
 
-[Describe how the slips were defined, or pointer to other discussion of this?]
+The slip distribution for each scenario is generated using von
+Karmon correlation functions where the correlation lengths are
+chosen to reflect the magnitude of the modeled earthquake based on
+empirical relationships of global events. We randomly generate the
+slip distribution for each scenario. For the “locking” branch of
+the logic tree, we weight a randomly generated slip distribution
+by interseismic geodetic locking (Li et al., 2018) which allows
+higher slip in regions of higher locking, which has been seen in
+other large earthquakes globally.
 
-[Say something here about the subevents added for high frequency shaking?]
+The earthquake scenarios are developed using what we call a “compound
+rupture model” where we combine long-period (low-frequency) background
+slip in the updip portion of the rupture with short-period
+(high-frequency) subevent slip in the downdip portion of the rupture.
+These high frequency patches, or subevents, have been observed and
+modeled for great subduction zone earthquakes globally and are
+necessary to match expected strong ground motion shaking from these
+events. The distribution of the background slip is most important
+for tsunami generation whereas the subevent slip is most important
+for matching high frequency, strong shaking from the earthquake.
+The figure below shows a comparison between the subevent distribution from
+the 2011 M9.1 Tohoku-Oki earthquake and an example CSZ scenario.
+
+:::{dropdown} Figure showing subevent distributions
+:close:
+```{figure} figures/tohoku_v_simulation_no_annotation.pdf
+:width: 600px
+:align: center
+```
+:::
 
 ## Seismic modeling and earthquake ground motions
 
 The seismic simulation code [SPECFEM3D](https://specfem.org/)
 was used to simulate wave propagation in 3-D using a seismic velocity
-model for Cascadia.  This produces synthetic waveforms (i.e., time
+model for Cascadia (Stephenson et al., 2017).  
+This produces synthetic waveforms (i.e., time
 series) of ground shaking and displacement for each scenario, which
-were captured at grid points on the earth surface (both
-onshore and on the sea floor).
+were captured at grid points on the earth surface (at 0m sea-level).
 
 For the purposes of tsunami modeling, the vertical deformation time series at
 each grid point on the earth surface have been subsampled in space and time to
@@ -175,20 +218,23 @@ of the earthquake (generally less than 500 seconds), to produce tsunami
 sources.  For the GeoClaw tsunami model, these are stored as `dtopo files`.
 
 Although initial tsunami simulations were performed using these
-deformation files, we observed that for many events the deformation
+deformation outputs, we observed that for many events the deformation
 near the coast was not always consistent with the geologic evidence
 of subsidence in past tsunami events.  Investigation revealed that
 the subevents that were added to provide realistic high-frequency
 shaking in the seismic wave forms resulted in artifacts in the
 vertical deformation that were often particularly large near the
-coast due to the location of the subevents.
+coast due to the location of the subevents. While subevents are
+necessary to model high-frequency energy from these earthquake
+scenarios, they result in modeling artifacts that impact deformation
+and therefore the tsunami generation.
 
-As a result, a new set of `NOSUB` slips were developed that correspond
-to similar earthquakes but without the subevents.  Each of these
-36 events has the same magnitude Mw as the original event it was
+As a result, a new set of scenarios were developed that correspond
+to similar earthquakes but without the subevents (`NOSUB`).  Each of these
+36 events has the same magnitude, slip distribution,
+and rupture timing as the original event it was
 based on, but with slip reassigned from the subevents to the main
-rupture [explain better?]. The temporal evolution of the rupture
-also matches the original. These new `NOSUB` events do not have the
+rupture. These new `NOSUB` events do not have the
 same high-frequency shaking as the originals, but for tsunami
 modeling these high-frequency waves have little effect.  They are
 better for tsunami modeling since the final vertical displacement
@@ -217,7 +263,7 @@ to compute the static deformation of the surface due to slip on a
 single triangular subfault.  This is often called the Okada model
 for deformation, since formulas for this deformation due to a point
 source or a rectangular subfault were published in widely cited
-papers by Y. Okada [citations].  The final static deformation for
+papers by Y. Okada (Okada, 1985, 1992).  The final static deformation for
 one of our events can be approximated by using the final slip (at
 large time) on each subfault, applying the Okada model to each in
 order to calculate the vertical deformation at each point on a grid
@@ -226,7 +272,7 @@ specified on the surface, and then summing these up over all subfaults
 
 In tsunami modeling this deformation is often then applied as an
 "instantaneous" rupture happening at the initial time of the
-simulation.  This loses all information about the time-dependent
+simulation.  This approach loses all information about the time-dependent
 behavior of the kinematic rupture, but since tsunami wave propagation
 generally happens on a much slower time scale than the rupture,
 this is often a decent approximation.  We have computed a set of
