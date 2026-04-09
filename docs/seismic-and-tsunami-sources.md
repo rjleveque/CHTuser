@@ -33,8 +33,10 @@ To use these ground motions in simulations on TACC, see
 
 The names of the 36 events are based on a logic tree that follows
 the National Seismic Hazard Model (NSHM) logic tree for Cascadia megathrust earthquakes where possible, which includes the following weights for the downdip limits:
-Deep: 0.2, Middle: 0.5, Shallow: 0.3 (Petersen et al., 2014; Petersen
-et al., 2024). The weights for the buried (0.75) and frontal thrust
+Deep: 0.2, Middle: 0.5, Shallow: 0.3
+([](https://doi.org/10.3133/ofr20141091); 
+[](https://doi.org/10.1177/87552930231215428)).
+The weights for the buried (0.75) and frontal thrust
 (0.25) are based on the logic tree developed by the USGS Powell
 Center Tsunami Sources Working Group (Sypus and Wang, 2024). Within
 each of these 6 branches there are 6 earthquake scenarios that have
@@ -165,7 +167,9 @@ probabilistic tsunami hazard assessment (PTHA) with these events.
 These 36 events were defined by first specifying a fault geometry
 for the Cascadia Subduction Zone megathrust surface (McCrory et
 al., 2012). For frontal thrust events, we used additional splay
-fault geometries from Ledeczi et al. (2024) and Lucas et al. (2025).
+fault geometries from
+[](https://doi.org/10.26443/seismica.v2i4.1158) and
+[](https://doi.org/10.26443/seismica.v2i4.1477)
 Our fault geometry consists of a large number of triangular subfaults.
 For each event, several quantities are defined on each of the
 subfaults, including:
