@@ -3,13 +3,15 @@
 
 As part of the [Cascadia CoPes Hub](https://cascadiacopeshub.org/) project,
 a new set of 36 ground motions have been computed using 3D simulations,
-archived at [](https://doi.org/10.17603/ds2-dqrm-dh11).
+archived on Design Safe at [](https://doi.org/10.17603/ds2-dqrm-dh11).
 
 
 The surface deformation from these ground motions can be used as sources
 for tsunami simulations. Several different versions of these have been
 computed, including for the full time-dependent kinematic rupture, but also
 static displacements for "instantaneous" tsunami generation.
+The development of these sources and their potential use for tsunami
+modeling is described in this paper: [](https://doi.org/10.1029/2025GL117783).
 
 Recently a modified set of events has also been generated that we feel
 are better to use for tsunami modeling.  These 36 events are
@@ -32,9 +34,11 @@ To use these ground motions in simulations on TACC, see
 ## Logic Tree
 
 The names of the 36 events are based on a logic tree that follows
-the National Seismic Hazard Model (NSHM) logic tree for Cascadia megathrust earthquakes where possible, which includes the following weights for the downdip limits:
+the National Seismic Hazard Model (NSHM) logic tree for Cascadia megathrust
+earthquakes where possible, which includes the following weights for
+the downdip limits:
 Deep: 0.2, Middle: 0.5, Shallow: 0.3
-([](https://doi.org/10.3133/ofr20141091); 
+([](https://doi.org/10.3133/ofr20141091);
 [](https://doi.org/10.1177/87552930231215428)).
 The weights for the buried (0.75) and frontal thrust
 (0.25) are based on the logic tree developed by the USGS Powell
@@ -48,7 +52,7 @@ The original middle downdip limit of slip is based on the 1 cm/yr
 locking contour from a combination of the McCaffrey et al. (2013)
 and Burgettes et al. (2009) locking models. To modify it, we took
 the 1 cm/yr locking contour from Li et al. (2018) which is very
-comparable to the NSHM with slighlty deeper slip in central Cascadia,
+comparable to the NSHM with slightly deeper slip in central Cascadia,
 leading to a better overall fit to paleoseismic estimates of
 subsidence.
 
@@ -277,7 +281,8 @@ to compute the static deformation of the surface due to slip on a
 single triangular subfault.  This is often called the Okada model
 for deformation, since formulas for this deformation due to a point
 source or a rectangular subfault were published in widely cited
-papers by Y. Okada (Okada, 1985, 1992).  The final static deformation for
+papers by Y. Okada [-@Okada1985], [-@Okada1992].
+The final static deformation for
 one of our events can be approximated by using the final slip (at
 large time) on each subfault, applying the Okada model to each in
 order to calculate the vertical deformation at each point on a grid
